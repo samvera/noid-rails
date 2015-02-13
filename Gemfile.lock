@@ -1,0 +1,34 @@
+PATH
+  remote: .
+  specs:
+    active_fedora-noid (0.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    diff-lcs (1.2.5)
+    noid (0.7.1)
+    rake (10.4.2)
+    rspec (3.2.0)
+      rspec-core (~> 3.2.0)
+      rspec-expectations (~> 3.2.0)
+      rspec-mocks (~> 3.2.0)
+    rspec-core (3.2.0)
+      rspec-support (~> 3.2.0)
+    rspec-expectations (3.2.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-mocks (3.2.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.2.0)
+    rspec-support (3.2.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  active_fedora-noid!
+  bundler (~> 1.7)
+  noid
+  rake (~> 10.0)
+  rspec

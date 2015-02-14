@@ -1,4 +1,5 @@
 require 'noid'
+require 'yaml'
 
 module ActiveFedora
   module Noid
@@ -19,6 +20,10 @@ module ActiveFedora
         end
       end
 
+      def valid?(identifier)
+        ::Noid::Minter.new(template: template).valid?(identifier)
+      end
+
       protected
 
       def default_template
@@ -31,13 +36,13 @@ module ActiveFedora
 
       def next_id
         id = ''
-        File.open(statefile, File::RDWR|File::CREAT, 0644) do |f|
-          f.flock(File::LOCK_EX)
-          yaml = YAML::load(f.read) || { template: template }
+        ::File.open(statefile, ::File::RDWR|::File::CREAT, 0644) do |f|
+          f.flock(::File::LOCK_EX)
+          yaml = ::YAML::load(f.read) || { template: template }
           minter = ::Noid::Minter.new(yaml)
           id = minter.mint
           f.rewind
-          yaml = YAML::dump(minter.dump)
+          yaml = ::YAML::dump(minter.dump)
           f.write yaml
           f.flush
           f.truncate(f.pos)

@@ -4,6 +4,9 @@ sudo: false
 rvm:
   - 2.2
   - 2.1
+env:
+  global:
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 notifications:
   email:
     recipients:

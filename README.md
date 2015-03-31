@@ -4,7 +4,7 @@
 [![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/active_fedora-noid)
 [![Build Status](https://travis-ci.org/projecthydra-labs/active_fedora-noid.png?branch=master)](https://travis-ci.org/projecthydra-labs/active_fedora-noid)
 [![Dependency Status](https://gemnasium.com/projecthydra-labs/active_fedora-noid.png)](https://gemnasium.com/projecthydra-labs/active_fedora-noid)
-[![Coverage Status](https://img.shields.io/coveralls/projecthydra-labs/active_fedora-noid.svg)](https://coveralls.io/r/projecthydra-labs/active_fedora-noid?branch=master)
+[![Coverage Status](https://coveralls.io/repos/projecthydra-labs/active_fedora-noid/badge.svg)](https://coveralls.io/r/projecthydra-labs/active_fedora-noid)
 
 # ActiveFedora::Noid
 

@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'active_fedora'
 require 'active_fedora/noid'
 require 'active_fedora/noid/synchronized_minter'

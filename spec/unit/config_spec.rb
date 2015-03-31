@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'active_fedora/noid/config'
 
 describe ActiveFedora::Noid::Config do

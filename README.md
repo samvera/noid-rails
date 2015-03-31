@@ -37,7 +37,7 @@ noid_service = ActiveFedora::Noid::Service.new
 noid = noid_service.mint
 ```
 
-This creates a Noid with the default identifier template, which you can override (see below).  Now that you have a service object with a template, you can also use it to validate identifier to see if they conform to the template:
+This creates a Noid with the default identifier template, which you can override (see below).  Now that you have a service object with a template, you can also use it to validate identifiers to see if they conform to the template:
 
 ```ruby
 noid_service.valid? 'xyz123foobar'
@@ -71,7 +71,9 @@ end
 
 ## Overriding default behavior
 
-The default minter creates a Noid and dumps it to a statefile in the /tmp directory. You can override the location or name of this statefile as follows:
+### Minter state (for replayability)
+
+The default minter creates a Noid and dumps it to a statefile in the /tmp directory. You can override the location or name of this statefile as follows in e.g. `config/initializers/active_fedora-noid.rb`:
 
 ```ruby
 require 'active_fedora/noid'
@@ -80,6 +82,8 @@ ActiveFedora::Noid.configure do |config|
   config.statefile = '/var/foo/bar'
 end
 ```
+
+### Identifier template
 
 To override the default identifier pattern -- a nine-character string consisting of two alphanumeric digits, two numeric digits, two alphanumeric digits, two numeric digits, and a check digit -- put the following code in e.g. `config/initializers/active_fedora-noid.rb`:
 
@@ -92,6 +96,8 @@ end
 ```
 
 For more information about the format of Noid patterns, see pages 8-10 of the [Noid documentation](https://wiki.ucop.edu/download/attachments/16744482/noid.pdf).
+
+### Custom minters
 
 If you don't want your minter's state to be persisted, you may also pass in your own minter.  First write up a minter class that looks like the following:
 

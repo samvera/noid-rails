@@ -12,6 +12,19 @@ Override your ActiveFedora-based applications with opaque [Noid](https://wiki.uc
 
 **This gem depends only upon ActiveFedora, not on Hydra or HydraHead**
 
+# Table of Contents
+
+  * [Installation](#installation)
+  * [Usage](#usage)
+    * [Minting and validating identifiers](#minting-and-validating-identifiers)
+    * [ActiveFedora integration](#activefedora-integration)
+    * [Overriding default behavior](#overriding-default-behavior)
+      * [Minter state (for replayability)](#minter-state-for-replayability)
+      * [Identifier template](#identifier-template)
+      * [Custom minters](#custom-minters)
+  * [Help](#help)
+  * [Acknowledgments](#acknowledgments)
+
 # Installation
 
 Add this line to your application's Gemfile:

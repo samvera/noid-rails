@@ -1,4 +1,4 @@
-require 'active_fedora/noid/config'
+require 'spec_helper'
 
 describe ActiveFedora::Noid::Config do
   it { is_expected.to respond_to(:template) }

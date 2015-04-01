@@ -1,5 +1,4 @@
-require 'active_fedora/noid/service'
-require 'active_fedora/noid/synchronized_minter'
+require 'spec_helper'
 
 describe ActiveFedora::Noid::Service do
   describe 'public API' do

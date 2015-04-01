@@ -1,6 +1,5 @@
+require 'spec_helper'
 require 'active_fedora'
-require 'active_fedora/noid'
-require 'active_fedora/noid/synchronized_minter'
 
 describe ActiveFedora::Noid::SynchronizedMinter do
   it { is_expected.to respond_to(:mint) }

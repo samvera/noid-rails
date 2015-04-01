@@ -1,4 +1,4 @@
-require 'active_fedora/noid'
+require 'spec_helper'
 
 describe ActiveFedora::Noid do
   describe '#configure' do

@@ -18,7 +18,7 @@ Override your ActiveFedora-based applications with opaque [Noid](https://wiki.uc
   * [Usage](#usage)
     * [Minting and validating identifiers](#minting-and-validating-identifiers)
     * [ActiveFedora integration](#activefedora-integration)
-      * [Identifier/URI translation](#identifier-uri-translation)
+      * [Identifier/URI translation](#identifieruri-translation)
     * [Overriding default behavior](#overriding-default-behavior)
       * [Minter state (for replayability)](#minter-state-for-replayability)
       * [Identifier template](#identifier-template)

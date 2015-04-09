@@ -18,6 +18,7 @@ Override your ActiveFedora-based applications with opaque [Noid](https://wiki.uc
   * [Usage](#usage)
     * [Minting and validating identifiers](#minting-and-validating-identifiers)
     * [ActiveFedora integration](#activefedora-integration)
+      * [Identifier/URI translation](#identifier-uri-translation)
     * [Overriding default behavior](#overriding-default-behavior)
       * [Minter state (for replayability)](#minter-state-for-replayability)
       * [Identifier template](#identifier-template)
@@ -81,6 +82,17 @@ class MyObject < ActiveFedora::Base
     end
 end
 ```
+
+### Identifier/URI translation
+
+As ActiveFedora::Noid overrides the default identifier minting strategy in ActiveFedora, you will need to let ActiveFedora know how to translate identifiers into URIs and vice versa so that identifiers are laid out in a sustainable way in Fedora.  Add the following to e.g. `config/initializers/active_fedora.rb`:
+
+```ruby
+ActiveFedora::Base.translate_uri_to_id = ActiveFedora::Noid.config.translate_uri_to_id
+ActiveFedora::Base.translate_id_to_uri = ActiveFedora::Noid.config.translate_id_to_uri
+```
+
+This will make sure your objects have Noid-like identifiers (e.g. `bb22bb22b`) that map to URIs in Fedora (e.g. `bb/22/bb/22/bb22bb22b`).
 
 ## Overriding default behavior
 

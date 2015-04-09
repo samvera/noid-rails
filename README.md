@@ -22,6 +22,7 @@ Override your ActiveFedora-based applications with opaque [Noid](https://wiki.uc
     * [Overriding default behavior](#overriding-default-behavior)
       * [Minter state (for replayability)](#minter-state-for-replayability)
       * [Identifier template](#identifier-template)
+      * [Treeifier](#treeifier)
       * [Custom minters](#custom-minters)
   * [Help](#help)
   * [Acknowledgments](#acknowledgments)
@@ -124,7 +125,7 @@ For more information about the format of Noid patterns, see pages 8-10 of the [N
 
 ### Treeifier
 
-To override the default "treeifier", simply pass in a callable object (responds to `call` and takes a string) via something like this in e.g. `config/initializers/active_fedora-noid.rb`:
+To override the default "treeifier" -- an MD5 checksum, the rationale for which is described in #3 -- simply pass in a callable object (responds to `call` and takes a string) via code like this in e.g. `config/initializers/active_fedora-noid.rb`:
 
 ```ruby
 require 'active_fedora/noid'
@@ -134,9 +135,9 @@ ActiveFedora::Noid.configure do |config|
 end
 ```
 
-In this way, you can customize how assets will be put into buckets.  Keeping the previous behavior is as easy as passing in a lambda that just returns the id as-is.
+In this way, you can customize how assets will be put into Fedora containers.
 
-**NOTE**: You must NOT change the treeifier after using it to store assets in production!  Doing so will cause your system to be unable to find existing assets!
+**NOTE**: You should NOT change the treeifier after using it to store assets in production!  Doing so will cause your system to be unable to find existing assets.
 
 ### Custom minters
 

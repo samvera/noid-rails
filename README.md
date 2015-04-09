@@ -125,7 +125,7 @@ For more information about the format of Noid patterns, see pages 8-10 of the [N
 
 ### Treeifier
 
-To override the default "treeifier" -- an MD5 checksum, the rationale for which is described in #3 -- simply pass in a callable object (responds to `call` and takes a string) via code like this in e.g. `config/initializers/active_fedora-noid.rb`:
+To override the default "treeifier" -- an MD5 checksum, the rationale for which is described in [#3](https://github.com/projecthydra-labs/active_fedora-noid/pull/3) -- simply pass in a callable object (responds to `call` and takes a string) via code like this in e.g. `config/initializers/active_fedora-noid.rb`:
 
 ```ruby
 require 'active_fedora/noid'

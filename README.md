@@ -122,6 +122,22 @@ end
 
 For more information about the format of Noid patterns, see pages 8-10 of the [Noid documentation](https://wiki.ucop.edu/download/attachments/16744482/noid.pdf).
 
+### Treeifier
+
+To override the default "treeifier", simply pass in a callable object (responds to `call` and takes a string) via something like this in e.g. `config/initializers/active_fedora-noid.rb`:
+
+```ruby
+require 'active_fedora/noid'
+
+ActiveFedora::Noid.configure do |config|
+  config.treeifier = ->(id) { id.reverse }
+end
+```
+
+In this way, you can customize how assets will be put into buckets.  Keeping the previous behavior is as easy as passing in a lambda that just returns the id as-is.
+
+**NOTE**: You must NOT change the treeifier after using it to store assets in production!  Doing so will cause your system to be unable to find existing assets!
+
 ### Custom minters
 
 If you don't want your minter's state to be persisted, you may also pass in your own minter.  First write up a minter class that looks like the following:

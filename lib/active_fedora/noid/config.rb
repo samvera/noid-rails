@@ -14,9 +14,10 @@ module ActiveFedora
       end
 
       # Default behavior turns an identifier into a completely unpredictable
-      # base-36 value for well-distributed "buckets"
+      # base-16 value for well-distributed "buckets", none of which can have
+      # more than 256 items (at least until asset count is in the billions)
       def treeifier
-        @treeifier ||= ->(id) { Digest::MD5.hexdigest(id).to_i(16).to_s(36) }
+        @treeifier ||= ->(id) { Digest::MD5.hexdigest(id) }
       end
 
       def translate_uri_to_id

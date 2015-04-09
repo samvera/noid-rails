@@ -15,7 +15,7 @@ describe ActiveFedora::Noid do
     context "with the default treeifier" do
       subject { ActiveFedora::Noid.treeify(id) }
       let(:id) { 'abc123def45' }
-      it { is_expected.to eq '2k/a5/k2/wg/abc123def45' }
+      it { is_expected.to eq '2b/4c/7a/ce/abc123def45' }
     end
 
     context "with overridden treeifier" do

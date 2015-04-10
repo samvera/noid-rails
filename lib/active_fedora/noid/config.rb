@@ -17,7 +17,13 @@ module ActiveFedora
       # base-16 value for well-distributed "buckets", none of which can have
       # more than 256 items (at least until asset count is in the billions)
       def treeifier
-        @treeifier ||= ->(id) { Digest::MD5.hexdigest(id) }
+        @treeifier ||= ->(id) do
+          if ActiveFedora::Noid::Service.new.valid?(id)
+            Digest::MD5.hexdigest(id)
+          else
+            id
+          end
+        end
       end
 
       def translate_uri_to_id

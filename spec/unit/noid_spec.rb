@@ -12,19 +12,29 @@ describe ActiveFedora::Noid do
   end
 
   describe '#treeify' do
+    let(:noid) { '2514nz446' }
+    let(:uuid) { '4a48496a-d56b-44a0-9836-e3381dfe13bd' }
+    let(:id) { noid }
+
     context "with the default treeifier" do
-      subject { ActiveFedora::Noid.treeify(id) }
-      let(:id) { 'abc123def45' }
-      it { is_expected.to eq '2b/4c/7a/ce/abc123def45' }
+      context "on a valid noid" do
+        subject { ActiveFedora::Noid.treeify(id) }
+        it { is_expected.to eq 'be/19/d0/b2/2514nz446' }
+      end
+
+      context "on a non-noid" do
+        subject { ActiveFedora::Noid.treeify(id) }
+        let(:id) { uuid }
+        it { is_expected.to eq '4a/48/49/6a/4a48496a-d56b-44a0-9836-e3381dfe13bd' }
+      end
     end
 
     context "with overridden treeifier" do
       subject { ActiveFedora::Noid.treeify(id) }
-      let(:id) { 'abc123def45' }
       before do
-        allow(ActiveFedora::Noid.config).to receive(:treeifier).and_return(->(id) { id })
+        allow(ActiveFedora::Noid.config).to receive(:treeifier).and_return(->(id) { "custom" })
       end
-      it { is_expected.to eq 'ab/c1/23/de/abc123def45' }
+      it { is_expected.to eq 'cu/st/om/2514nz446' }
     end
   end
 end

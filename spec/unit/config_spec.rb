@@ -23,4 +23,12 @@ describe ActiveFedora::Noid::Config do
       end
     end
   end
+
+  describe '#translate_uri_to_id' do
+    let(:translator) { described_class.new.translate_uri_to_id }
+    let(:uri) { "http://localhost:8983/fedora/rest/test/hh/63/vz/22/hh63vz22q/members" }
+    subject { translator.call(uri) }
+
+    it { is_expected.to eq 'hh63vz22q/members' }
+  end
 end

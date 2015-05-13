@@ -12,7 +12,7 @@ module ActiveFedora
       end
 
       def translate_uri_to_id
-        lambda { |uri| uri.to_s.split('/')[-1] }
+        lambda { |uri| URI(uri).path.split('/', 9).last }
       end
 
       def translate_id_to_uri

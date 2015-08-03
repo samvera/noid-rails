@@ -4,8 +4,8 @@ require 'active_fedora'
 describe ActiveFedora::Noid::SynchronizedMinter do
   it { is_expected.to respond_to(:mint) }
 
-  it 'has a default template' do
-    expect(subject.template).to eq ActiveFedora::Noid.config.template
+  it 'has a default statefile' do
+    expect(subject.statefile).to eq ActiveFedora::Noid.config.statefile
   end
 
   it 'has a default template' do

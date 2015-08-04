@@ -1,6 +1,4 @@
 require 'noid'
-require 'yaml'
-
 module ActiveFedora
   module Noid
     class SynchronizedMinter
@@ -34,16 +32,22 @@ module ActiveFedora
         @statefile ||= ActiveFedora::Noid.config.statefile
       end
 
+      def state_for(io_object)
+        Marshal.load(io_object.read)
+      rescue TypeError, ArgumentError
+        { template: template }
+      end
+
       def next_id
         id = ''
         ::File.open(statefile, ::File::RDWR|::File::CREAT, 0644) do |f|
           f.flock(::File::LOCK_EX)
-          yaml = ::YAML::load(f.read) || { template: template }
-          minter = ::Noid::Minter.new(yaml)
+          state = state_for(f)
+          minter = ::Noid::Minter.new(state)
           id = minter.mint
           f.rewind
-          yaml = ::YAML::dump(minter.dump)
-          f.write yaml
+          new_state = Marshal.dump(minter.dump)
+          f.write(new_state)
           f.flush
           f.truncate(f.pos)
         end

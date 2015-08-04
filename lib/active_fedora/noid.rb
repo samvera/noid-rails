@@ -15,7 +15,7 @@ module ActiveFedora
       end
 
       def treeify(identifier)
-        (config.treeifier.call(identifier).scan(/..?/).first(4) + [identifier]).join('/')
+        (identifier.scan(/..?/).first(4) + [identifier]).join('/')
       end
     end
   end

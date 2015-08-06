@@ -3,3 +3,5 @@ require 'rspec/core/rake_task'
 
 task default: :spec
 RSpec::Core::RakeTask.new
+
+import './lib/tasks/noid_tasks.rake'

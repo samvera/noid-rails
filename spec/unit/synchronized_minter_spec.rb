@@ -43,6 +43,16 @@ describe ActiveFedora::Noid::SynchronizedMinter do
     it 'is valid' do
       expect(ActiveFedora::Noid::Service.new.valid?(subject)).to be true
     end
+
+    context 'with a non-UTF8 encoding (mimicking the Rails environment)' do
+      subject { ActiveFedora::Noid::SynchronizedMinter.new }
+      before do
+        allow(subject).to receive(:file_opts) { { encoding: Encoding::UTF_8 } }
+      end
+      it 'mints an ID' do
+        expect { subject.mint }.not_to raise_error
+      end
+    end
   end
 
   context "when the pid already exists in Fedora" do

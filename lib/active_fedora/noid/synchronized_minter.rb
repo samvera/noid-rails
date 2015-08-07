@@ -38,22 +38,21 @@ module ActiveFedora
         { template: template }
       end
 
-      def file_opts
-        { encoding: Encoding::ASCII_8BIT }
-      end
-
       def next_id
         id = ''
-        ::File.open(statefile, ::File::RDWR|::File::CREAT, 0644, file_opts) do |f|
+        ::File.open(statefile, 'a+b', 0644) do |f|
           f.flock(::File::LOCK_EX)
+          # Files opened in append mode seek to end of file
+          f.rewind
           state = state_for(f)
           minter = ::Noid::Minter.new(state)
+
           id = minter.mint
-          f.rewind
+
+          # Wipe prior contents so the new state can be written from the beginning of the file
+          f.truncate(0)
           new_state = Marshal.dump(minter.dump)
-          f.write(new_state.force_encoding(f.external_encoding))
-          f.flush
-          f.truncate(f.pos)
+          f.write(new_state)
         end
         id
       end

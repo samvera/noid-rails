@@ -9,19 +9,18 @@ namespace :active_fedora do
       statefile = ENV.fetch('AFNOID_STATEFILE', ActiveFedora::Noid.config.statefile)
       raise "File not found: #{statefile}\nAborting" unless File.exist?(statefile)
       puts "Migrating #{statefile} from YAML to Marshal serialization..."
-      File.open(statefile, File::RDWR | File::CREAT, 0644) do |f|
+      File.open(statefile, 'a+b', 0644) do |f|
         f.flock(File::LOCK_EX)
+        f.rewind
         begin
           yaml_state = YAML.load(f)
         rescue Psych::SyntaxError
           raise "File not valid YAML: #{statefile}\nAborting."
         end
         minter = Noid::Minter.new(yaml_state)
-        f.rewind
+        f.truncate(0)
         new_state = Marshal.dump(minter.dump)
         f.write(new_state)
-        f.flush
-        f.truncate(f.pos)
       end
       puts "Done!"
     end

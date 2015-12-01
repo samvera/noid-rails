@@ -13,7 +13,7 @@ module ActiveFedora
         Mutex.new.synchronize do
           while true
             pid = next_id
-            return pid unless ActiveFedora::Base.exists?(pid)
+            return pid unless ActiveFedora::Base.exists?(pid) || ActiveFedora::Base.gone?(pid)
           end
         end
       end

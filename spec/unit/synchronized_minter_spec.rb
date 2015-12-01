@@ -30,6 +30,7 @@ describe ActiveFedora::Noid::SynchronizedMinter do
   describe '#mint' do
     before do
       allow(ActiveFedora::Base).to receive(:exists?).and_return(false)
+      allow(ActiveFedora::Base).to receive(:gone?).and_return(false)
     end
 
     subject { ActiveFedora::Noid::Service.new.mint }
@@ -53,9 +54,26 @@ describe ActiveFedora::Noid::SynchronizedMinter do
       allow_any_instance_of(ActiveFedora::Noid::SynchronizedMinter).to receive(:next_id).and_return(existing_pid, unique_pid)
       allow(ActiveFedora::Base).to receive(:exists?).with(existing_pid).and_return(true)
       allow(ActiveFedora::Base).to receive(:exists?).with(unique_pid).and_return(false)
+      allow(ActiveFedora::Base).to receive(:gone?).and_return(false)
     end
 
     it 'skips the existing pid' do
+      expect(subject.mint).to eq unique_pid
+    end
+  end
+
+  context "when the pid already existed in Fedora and now is gone" do
+    let(:gone_pid) { 'ef12ef12f' }
+    let(:unique_pid) { 'bb22bb22b' }
+
+    before do
+      allow_any_instance_of(ActiveFedora::Noid::SynchronizedMinter).to receive(:next_id).and_return(gone_pid, unique_pid)
+      allow(ActiveFedora::Base).to receive(:gone?).with(gone_pid).and_return(true)
+      allow(ActiveFedora::Base).to receive(:gone?).with(unique_pid).and_return(false)
+      allow(ActiveFedora::Base).to receive(:exists?).and_return(false)
+    end
+
+    it 'skips the deleted pid' do
       expect(subject.mint).to eq unique_pid
     end
   end

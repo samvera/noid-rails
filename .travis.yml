@@ -10,11 +10,6 @@ env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 notifications:
-  email:
-    recipients:
-      - "ul-dlt-hydra@lists.psu.edu"
-    on_success: "change"
-    on_failure: "always"
   irc:
     channels:
       - "irc.freenode.org#projecthydra"

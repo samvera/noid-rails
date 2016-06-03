@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ActiveFedora::Noid do
   describe '#configure' do
     it { is_expected.to respond_to(:configure) }

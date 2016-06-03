@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'active_fedora'
 
 describe ActiveFedora::Noid::SynchronizedMinter do

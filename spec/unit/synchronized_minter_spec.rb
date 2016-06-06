@@ -8,7 +8,7 @@ describe ActiveFedora::Noid::SynchronizedMinter do
   end
 
   it 'has a default template' do
-    expect(subject.template).to eq ActiveFedora::Noid.config.template
+    expect(subject.template.to_s).to eq ActiveFedora::Noid.config.template
   end
 
   describe '#initialize' do
@@ -18,7 +18,7 @@ describe ActiveFedora::Noid::SynchronizedMinter do
     subject { ActiveFedora::Noid::SynchronizedMinter.new(template, statefile) }
 
     it 'respects the custom template' do
-      expect(subject.template).to eq template
+      expect(subject.template.to_s).to eq template
     end
 
     it 'respects the custom statefile' do

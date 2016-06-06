@@ -1,6 +1,7 @@
 require 'active_fedora/noid/version'
 require 'active_fedora/noid/config'
 require 'active_fedora/noid/service'
+require 'active_fedora/noid/minter/base'
 require 'active_fedora/noid/synchronized_minter'
 
 module ActiveFedora

@@ -1,6 +1,5 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+$:.push File.expand_path('../lib', __FILE__)
+
 require 'active_fedora/noid/version'
 
 Gem::Specification.new do |spec|
@@ -19,10 +18,13 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'active-fedora', '>= 9.7', '< 11'
   spec.add_dependency 'noid', '~> 0.7'
+  spec.add_dependency 'rails', '~> 4.2.6'
 
+  spec.add_development_dependency 'engine_cart'
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency 'rspec', '~> 3.2'
+  spec.add_development_dependency 'sqlite3'
 
   spec.post_install_message = <<-END
 NOTE: ActiveFedora::Noid 1.0.0 included a change that breaks existing minter

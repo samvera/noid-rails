@@ -6,6 +6,7 @@ gemspec
 group :development, :test do
   gem 'coveralls', require: false
 end
+
 # BEGIN ENGINE_CART BLOCK
 # engine_cart: 0.8.2
 # engine_cart stanza: 0.8.0

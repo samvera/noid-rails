@@ -32,3 +32,5 @@ pkg
 /vendor/assets/bower_components
 *.bowerrc
 bower.json
+
+.internal_test_app

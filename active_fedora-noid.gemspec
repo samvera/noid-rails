@@ -25,6 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency 'rspec', '~> 3.2'
   spec.add_development_dependency 'sqlite3'
+  spec.add_development_dependency 'engine_cart', '~> 0.8'
 
   spec.post_install_message = <<-END
 NOTE: ActiveFedora::Noid 1.0.0 included a change that breaks existing minter

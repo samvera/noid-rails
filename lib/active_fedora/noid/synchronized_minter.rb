@@ -23,7 +23,7 @@ module ActiveFedora
       end
 
       def next_id
-        id = ''
+        id = nil
         ::File.open(statefile, 'a+b', 0644) do |f|
           f.flock(::File::LOCK_EX)
           # Files opened in append mode seek to end of file

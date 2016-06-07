@@ -1,6 +1,7 @@
 describe ActiveFedora::Noid::Config do
   it { is_expected.to respond_to(:template) }
   it { is_expected.to respond_to(:statefile) }
+  it { is_expected.to respond_to(:namespace) }
   it { is_expected.to respond_to(:translate_id_to_uri) }
   it { is_expected.to respond_to(:translate_uri_to_id) }
 

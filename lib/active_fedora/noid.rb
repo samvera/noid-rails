@@ -3,6 +3,7 @@ require 'active_fedora/noid/config'
 require 'active_fedora/noid/engine'
 require 'active_fedora/noid/service'
 require 'active_fedora/noid/minter/base'
+require 'active_fedora/noid/minter/db'
 require 'active_fedora/noid/synchronized_minter'
 
 module ActiveFedora

@@ -1,7 +1,7 @@
 module ActiveFedora
   module Noid
     class Config
-      attr_writer :template, :translate_uri_to_id, :translate_id_to_uri, :statefile
+      attr_writer :template, :translate_uri_to_id, :translate_id_to_uri, :statefile, :namespace
 
       def template
         @template ||= '.reeddeeddk'
@@ -9,6 +9,10 @@ module ActiveFedora
 
       def statefile
         @statefile ||= '/tmp/minter-state'
+      end
+
+      def namespace
+        @namespace ||= 'default'
       end
 
       def translate_uri_to_id

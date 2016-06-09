@@ -1,5 +1,3 @@
-require 'active_fedora'
-
 describe ActiveFedora::Noid::SynchronizedMinter do
   it { is_expected.to respond_to(:mint) }
 

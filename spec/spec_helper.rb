@@ -1,10 +1,11 @@
+ENV["RAILS_ENV"] ||= 'test'
+
 require 'coveralls'
 Coveralls.wear!
 require 'engine_cart'
 EngineCart.load_application!
 
 require 'active_fedora'
-require 'byebug' unless ENV['CI']
 require 'active_fedora/noid'
 require 'byebug' unless ENV['CI']
 

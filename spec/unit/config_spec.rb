@@ -37,6 +37,11 @@ describe ActiveFedora::Noid::Config do
 
     it { is_expected.to eq 'hh63vz22q/members' }
 
+    context "with a hash code uri" do
+      let(:uri) { "http://localhost:8983/fedora/rest/test/hh/63/vz/22/hh63vz22q#g123" }
+    it { is_expected.to eq 'hh63vz22q#g123' }
+    end
+
     describe 'with a short custom template' do
       let(:uri) { "http://localhost:8983/fedora/rest/test/ab/cd/abcd/members" }
       let(:custom_template) { '.reeee' }

@@ -1,6 +1,8 @@
 require 'coveralls'
 Coveralls.wear!
 
+require 'active_fedora'
+require 'byebug' unless ENV['CI']
 require 'active_fedora/noid'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

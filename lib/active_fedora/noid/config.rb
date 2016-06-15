@@ -12,7 +12,9 @@ module ActiveFedora
       end
 
       def translate_uri_to_id
-        lambda { |uri| URI(uri).path.split('/', baseparts).last }
+        lambda do |uri|
+          uri.to_s.sub(baseurl, '').split('/', baseparts).last
+        end
       end
 
       def translate_id_to_uri
@@ -28,8 +30,7 @@ module ActiveFedora
       end
 
       def baseparts
-        treeparts = [(template.gsub(/\.[rsz]/,'').length.to_f/2).ceil, 4].min
-        baseurl.count('/') + treeparts
+        2 + [(template.gsub(/\.[rsz]/,'').length.to_f/2).ceil, 4].min
       end
     end
   end

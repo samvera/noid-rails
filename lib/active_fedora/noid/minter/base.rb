@@ -5,7 +5,7 @@ module ActiveFedora
     module Minter
       class Base < ::Noid::Minter
         def initialize(template = default_template)
-          super(:template => template)
+          super(:template => template.to_s)
         end
 
         def mint

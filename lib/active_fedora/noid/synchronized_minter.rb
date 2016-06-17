@@ -29,6 +29,7 @@ module ActiveFedora
           # Files opened in append mode seek to end of file
           f.rewind
           state = state_for(f)
+          state[:template] &&= state[:template].to_s
           minter = ::Noid::Minter.new(state) # minter w/in the minter, lives only for an instant
           id = minter.mint
 

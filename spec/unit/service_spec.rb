@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe ActiveFedora::Noid::Service do
   describe 'public API' do
     it { is_expected.to respond_to(:valid?) }

@@ -1,8 +1,7 @@
-require 'spec_helper'
-
 describe ActiveFedora::Noid::Config do
   it { is_expected.to respond_to(:template) }
   it { is_expected.to respond_to(:statefile) }
+  it { is_expected.to respond_to(:namespace) }
   it { is_expected.to respond_to(:translate_id_to_uri) }
   it { is_expected.to respond_to(:translate_uri_to_id) }
 
@@ -47,7 +46,7 @@ describe ActiveFedora::Noid::Config do
       let(:custom_template) { '.reeee' }
       before { config.template = custom_template }
       subject { translator.call(uri) }
-  
+
       it { is_expected.to eq 'abcd/members' }
     end
 
@@ -56,7 +55,7 @@ describe ActiveFedora::Noid::Config do
       let(:custom_template) { '.reee' }
       before { config.template = custom_template }
       subject { translator.call(uri) }
-  
+
       it { is_expected.to eq 'abc/members' }
     end
 
@@ -65,7 +64,7 @@ describe ActiveFedora::Noid::Config do
       let(:custom_template) { '.reeeeeeeeeeeeeeeeeeeeeeeeee' }
       before { config.template = custom_template }
       subject { translator.call(uri) }
-  
+
       it { is_expected.to eq 'abcdefghijklmnopqrstuvwxyz/members' }
     end
 

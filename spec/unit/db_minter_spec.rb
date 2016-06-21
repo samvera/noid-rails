@@ -1,4 +1,9 @@
-describe ActiveFedora::Noid::SynchronizedMinter do
+include MinterStateHelper
+
+describe ActiveFedora::Noid::Minter::Db do
+  before(:each) { reset_minter_state_table }
+  after( :all ) { reset_minter_state_table }
+
   before :each do
     # default novel mintings
     allow(ActiveFedora::Base).to receive(:exists?).and_return(false)
@@ -6,26 +11,24 @@ describe ActiveFedora::Noid::SynchronizedMinter do
   end
 
   let(:minter) { described_class.new }
-
-  it { is_expected.to respond_to(:mint) }
-  it 'has a default statefile' do
-    expect(subject.statefile).to eq ActiveFedora::Noid.config.statefile
-  end
-  it 'has a default template' do
-    expect(subject.template.to_s).to eq ActiveFedora::Noid.config.template
-  end
+  let(:other) { described_class.new('.reedddk') }
 
   describe '#initialize' do
-    let(:template) { '.rededk' }
-    let(:statefile) { '/tmp/foobar' }
-
-    subject { described_class.new(template, statefile) }
-
-    it 'respects the custom template' do
-      expect(subject.template.to_s).to eq template
+    it 'raises on bad templates' do
+      expect{ described_class.new('reeddeeddk') }.to raise_error(Noid::TemplateError)
+      expect{ described_class.new('')           }.to raise_error(Noid::TemplateError)
     end
-    it 'respects the custom statefile' do
-      expect(subject.statefile).to eq statefile
+    it 'returns object w/ default template' do
+      expect(minter).to be_instance_of described_class
+      expect(minter).to be_a Noid::Minter
+      expect(minter.template).to be_instance_of Noid::Template
+      expect(minter.template.to_s).to eq ActiveFedora::Noid.config.template
+    end
+    it 'accepts valid template arg' do
+      expect(other).to be_instance_of described_class
+      expect(other).to be_a Noid::Minter
+      expect(other.template).to be_instance_of Noid::Template
+      expect(other.template.to_s).to eq '.reedddk'
     end
   end
 
@@ -39,11 +42,14 @@ describe ActiveFedora::Noid::SynchronizedMinter do
       expect(minter.valid?(subject)).to be true
       expect(described_class.new.valid?(subject)).to be true
     end
+    it 'is invalid under a different template' do
+      expect(described_class.new('.reedddk').valid?(subject)).to be false
+    end
   end
 
   context 'conflicts' do
-    let(:unique_pid) { 'bb22bb22b' }
     let(:existing_pid) { 'ef12ef12f' }
+    let(:unique_pid) { 'bb22bb22b' }
     before :each do
       expect(minter).to receive(:next_id).and_return(existing_pid, unique_pid)
     end

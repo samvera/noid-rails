@@ -1,7 +1,7 @@
 module ActiveFedora
   module Noid
     class InstallGenerator < Rails::Generators::Base
-      source_root File.expand_path('../templates', __FILE__)
+      source_root ::File.expand_path('../templates', __FILE__)
 
       desc <<-END_OF_DESC
 Copies DB migrations

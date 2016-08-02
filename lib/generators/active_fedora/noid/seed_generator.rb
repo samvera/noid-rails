@@ -1,7 +1,7 @@
 module ActiveFedora
   module Noid
     class SeedGenerator < Rails::Generators::Base
-      source_root File.expand_path('../templates', __FILE__)
+      source_root ::File.expand_path('../templates', __FILE__)
       argument :namespace, :type => :string, :default => ActiveFedora::Noid.config.namespace
       argument :template, :type => :string, :default => ActiveFedora::Noid.config.template
 

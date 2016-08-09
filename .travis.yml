@@ -3,12 +3,12 @@ cache: bundler
 sudo: false
 rvm:
   - 2.3.1
-  - 2.2
-  - 2.1
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+  matrix:
     - "RAILS_VERSION=4.2.6"
+    - "RAILS_VERSION=5.0.0"
 notifications:
   irc:
     channels:

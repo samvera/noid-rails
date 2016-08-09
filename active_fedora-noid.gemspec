@@ -26,12 +26,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.2'
   spec.add_development_dependency 'sqlite3'
   spec.add_development_dependency 'engine_cart', '~> 0.8'
-
-  spec.post_install_message = <<-END
-NOTE: ActiveFedora::Noid 1.0.0 included a change that breaks existing minter
-statefiles. Run the `active_fedora:noid:migrate_statefile` rake task to migrate
-your statefile. (If you're using a custom statefile, not /tmp/minter-state, set
-an environment variable called AFNOID_STATEFILE with its path.)
-END
-
 end

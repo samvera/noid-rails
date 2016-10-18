@@ -6,7 +6,6 @@ gemspec
 group :development, :test do
   gem 'byebug' unless ENV['CI']
   gem 'coveralls', require: false
-  gem 'byebug' unless ENV['CI']
 end
 # BEGIN ENGINE_CART BLOCK
 # engine_cart: 0.8.2

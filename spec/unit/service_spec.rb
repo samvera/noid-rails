@@ -5,7 +5,7 @@ describe ActiveFedora::Noid::Service do
   end
 
   it 'has a default minter' do
-    expect(subject.minter).to be_instance_of ActiveFedora::Noid::SynchronizedMinter
+    expect(subject.minter).to be_instance_of ActiveFedora::Noid::Minter::Db
   end
 
   context 'with a custom minter' do

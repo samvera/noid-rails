@@ -2,7 +2,7 @@ include MinterStateHelper
 
 describe ActiveFedora::Noid::Minter::Db do
   before(:each) { reset_minter_state_table }
-  after( :all ) { reset_minter_state_table }
+  after(:all) { reset_minter_state_table }
 
   before :each do
     # default novel mintings
@@ -10,8 +10,11 @@ describe ActiveFedora::Noid::Minter::Db do
     allow(ActiveFedora::Base).to receive(:gone?).and_return(false)
   end
 
-  let(:minter) { described_class.new }
   let(:other) { described_class.new('.reedddk') }
+
+  it_behaves_like 'a minter' do
+    let(:minter) { described_class.new }
+  end
 
   describe '#initialize' do
     it 'raises on bad templates' do
@@ -19,10 +22,10 @@ describe ActiveFedora::Noid::Minter::Db do
       expect{ described_class.new('')           }.to raise_error(Noid::TemplateError)
     end
     it 'returns object w/ default template' do
-      expect(minter).to be_instance_of described_class
-      expect(minter).to be_a Noid::Minter
-      expect(minter.template).to be_instance_of Noid::Template
-      expect(minter.template.to_s).to eq ActiveFedora::Noid.config.template
+      expect(subject).to be_instance_of described_class
+      expect(subject).to be_a Noid::Minter
+      expect(subject.template).to be_instance_of Noid::Template
+      expect(subject.template.to_s).to eq ActiveFedora::Noid.config.template
     end
     it 'accepts valid template arg' do
       expect(other).to be_instance_of described_class
@@ -32,45 +35,29 @@ describe ActiveFedora::Noid::Minter::Db do
     end
   end
 
-  describe '#mint' do
-    subject { minter.mint }
-    it { is_expected.not_to be_empty }
-    it 'does not mint the same ID twice in a row' do
-      expect(subject).not_to eq described_class.new.mint
+  describe '#read' do
+    it 'returns a hash' do
+      expect(subject.read).to be_a(Hash)
     end
-    it 'is valid' do
-      expect(minter.valid?(subject)).to be true
-      expect(described_class.new.valid?(subject)).to be true
+    it 'has the expected namespace' do
+      expect(subject.read[:namespace]).to eq ActiveFedora::Noid.config.namespace
     end
-    it 'is invalid under a different template' do
-      expect(described_class.new('.reedddk').valid?(subject)).to be false
+    it 'has the expected template' do
+      expect(subject.read[:template]).to eq ActiveFedora::Noid.config.template
     end
   end
 
-  context 'conflicts' do
-    let(:existing_pid) { 'ef12ef12f' }
-    let(:unique_pid) { 'bb22bb22b' }
-    before :each do
-      expect(minter).to receive(:next_id).and_return(existing_pid, unique_pid)
-    end
-
-    context 'when the pid already exists in Fedora' do
-      before do
-        expect(ActiveFedora::Base).to receive(:exists?).with(existing_pid).and_return(true)
-      end
-      it 'skips the existing pid' do
-        expect(minter.mint).to eq unique_pid
-      end
-    end
-
-    context 'when the pid already existed in Fedora and now is gone' do
-      let(:gone_pid) { existing_pid }
-      before do
-        expect(ActiveFedora::Base).to receive(:gone?).with(gone_pid).and_return(true)
-      end
-      it 'skips the deleted pid' do
-        expect(minter.mint).to eq unique_pid
-      end
+  describe '#write!' do
+    let(:starting_state) { subject.read }
+    let(:minter) { Noid::Minter.new(starting_state) }
+    before { minter.mint }
+    it 'changes the state of the minter' do
+      expect { subject.write!(minter) }.to change { subject.read[:seq] }
+                                           .from(starting_state[:seq]).to(minter.seq)
+                                       .and change { subject.read[:counters] }
+                                           .from(starting_state[:counters]).to(minter.counters)
+                                       .and change { subject.read[:rand] }
+                                           .from(starting_state[:rand]).to(Marshal.dump(minter.instance_variable_get(:@rand)))
     end
   end
 end

@@ -20,7 +20,7 @@ module ActiveFedora
       protected
 
       def default_minter
-        ActiveFedora::Noid::SynchronizedMinter.new
+        ActiveFedora::Noid.config.minter_class.new
       end
     end
   end

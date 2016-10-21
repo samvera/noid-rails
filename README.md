@@ -97,16 +97,28 @@ This will make sure your objects have Noid-like identifiers (e.g. `bb22bb22b`) t
 
 ## Overriding default behavior
 
-### Minter state (for replayability)
+The default minter in ActiveFedora::Noid 2.x is the database-backed minter to better support multi-host production installations that expect a shared database but not necessarily a shared filesystem (e.g., between load-balanced Rails applications).
 
-The default minter creates a Noid and dumps it to a statefile in the /tmp directory. You can override the location or name of this statefile as follows in e.g. `config/initializers/active_fedora-noid.rb`:
+### Use file-based minter state (for replayability)
+
+The file-based minter -- which was the default and only minter in 1.x -- creates a Noid and dumps it to a statefile in the /tmp directory. You can override the location or name of this statefile as follows in e.g. `config/initializers/active_fedora-noid.rb`:
 
 ```ruby
 require 'active_fedora/noid'
 
 ActiveFedora::Noid.configure do |config|
+  config.minter_class = ActiveFedora::Noid::Minter::File
   config.statefile = '/var/foo/bar'
 end
+```
+
+**NOTE**: If you switch to a new minter, it will not automatically start with the same state as the old minter. AF::Noid does include a couple of rake tasks for copying state from database-backed minters to file-backed ones and vice versa:
+
+``` bash
+# For migrating minter state from a file to a database
+$ rake active_fedora:noid:migrate:file_to_database
+# For migrating minter state from a database to a file
+$ rake active_fedora:noid:migrate:database_to_file
 ```
 
 ### Identifier template
@@ -125,28 +137,38 @@ For more information about the format of Noid patterns, see pages 8-10 of the [N
 
 ### Custom minters
 
-If you don't want your minter's state to be persisted, you may also pass in your own minter.  First write up a minter class that looks like the following:
+If you don't want your minter's state to be persisted, you may also write and configure your own minter.  First write up a minter class that looks like the following:
 
 ```ruby
-class MyMinter
-  def initialize(*args)
-    # do something if you need initialization
-  end
-
-  def mint
-    # spit out an identifier
-  end
-
+class MyMinter < ActiveFedora::Noid::Minter::Base
   def valid?(identifier)
     # return true/false if you care about ids conforming to templates
+  end
+
+  def read
+    # return current minter state
+  end
+
+  def write!(state)
+    # write a passed-in minter state
+  end
+
+  protected
+
+  def next_id
+    # return the next identifier from the minter
   end
 end
 ```
 
-Then inject an instance of your minter into ActiveFedora::Noid::Service:
+Then add your new minter class to the ActiveFedora::Noid configuration (`config/initializers/active_fedora-noid.rb`):
 
 ```ruby
-noid_service = ActiveFedora::Noid::Service.new(MyMinter.new)
+require 'active_fedora/noid'
+
+ActiveFedora::Noid.configure do |config|
+  config.minter_class = MyMinter
+end
 ```
 
 And the service will delegate minting and validating to an instance of your customized minter class.

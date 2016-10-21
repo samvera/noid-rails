@@ -1,7 +1,10 @@
 describe ActiveFedora::Noid::Config do
+  subject { described_class.new }
+
   it { is_expected.to respond_to(:template) }
   it { is_expected.to respond_to(:statefile) }
   it { is_expected.to respond_to(:namespace) }
+  it { is_expected.to respond_to(:minter_class) }
   it { is_expected.to respond_to(:translate_id_to_uri) }
   it { is_expected.to respond_to(:translate_uri_to_id) }
 
@@ -19,6 +22,22 @@ describe ActiveFedora::Noid::Config do
 
       it 'allows setting a custom template' do
         expect(subject.template).to eq custom_template
+      end
+    end
+  end
+
+  describe '#minter_class' do
+    let(:default) { ActiveFedora::Noid::Minter::Db }
+
+    it 'has a default' do
+      expect(subject.minter_class).to eq default
+    end
+
+    context 'when overridden' do
+      before { subject.minter_class = different_minter }
+      let(:different_minter) { ActiveFedora::Noid::Minter::File }
+      it 'uses the different minter' do
+        expect(subject.minter_class).to eq different_minter
       end
     end
   end

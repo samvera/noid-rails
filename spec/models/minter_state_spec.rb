@@ -37,22 +37,4 @@ describe MinterState, type: :model do
       expect(described_class.group(:namespace).count).to eq('default' => 1, 'foobar' => 1)
     end
   end
-
-  describe '#noid_options' do
-    it 'returns nil without template (new object not persisted)' do
-      expect(state.noid_options).to be_nil
-    end
-    it 'returns correct hash when populated' do
-      state.template = '.reeddddk'
-      state.seq = 1
-      expect(state.noid_options).to match a_hash_including(
-        :template => '.reeddddk',
-        :seq => 1
-      )
-      expect(first.noid_options).to match a_hash_including(
-        :template => '.reeddeeddk',
-        :seq => 0
-      )
-    end
-  end
 end

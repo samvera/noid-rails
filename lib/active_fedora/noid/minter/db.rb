@@ -4,6 +4,22 @@ module ActiveFedora
   module Noid
     module Minter
       class Db < Base
+
+        def read
+          filtered_hash = instance.as_json.select { |key| ['template', 'counters', 'seq', 'rand', 'namespace'].include?(key) }
+          filtered_hash['counters'] = JSON.parse(filtered_hash['counters'], symbolize_names: true) if filtered_hash['counters']
+          filtered_hash.symbolize_keys
+        end
+
+        def write!(minter)
+          # namespace and template are the same, now update the other attributes
+          instance.update_attributes!(
+            seq: minter.seq,
+            counters: JSON.generate(minter.counters),
+            rand: Marshal.dump(minter.instance_variable_get(:@rand))
+          )
+        end
+
         protected
 
         # Uses pessimistic lock to ensure the record fetched is the same one updated.
@@ -19,21 +35,20 @@ module ActiveFedora
         def next_id
           id = nil
           MinterState.transaction do
-            state = MinterState.lock.where(
-              namespace: ActiveFedora::Noid.config.namespace,
-              template: ActiveFedora::Noid.config.template,
-            ).first!
-            minter = ::Noid::Minter.new(state.noid_options)
+            state = read
+            minter = ::Noid::Minter.new(state)
             id = minter.mint
-            # namespace and template are the same, now update the other attributes
-            state.seq      = minter.seq
-            state.counters = JSON.generate(minter.counters)
-            state.random   = Marshal.dump(minter.instance_variable_get(:@rand))
-            state.save!
+            write!(minter)
           end # transaction
           id
         end
 
+        def instance
+          MinterState.lock.find_by(
+            namespace: ActiveFedora::Noid.config.namespace,
+            template: ActiveFedora::Noid.config.template,
+          )
+        end
       end # class Db
     end
   end

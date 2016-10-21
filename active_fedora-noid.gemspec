@@ -22,8 +22,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails', '>= 4.2.6', '< 6'
 
   spec.add_development_dependency "bundler", "~> 1.7"
-  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "rake", "~> 11.0"
   spec.add_development_dependency 'rspec', '~> 3.2'
   spec.add_development_dependency 'sqlite3'
-  spec.add_development_dependency 'engine_cart', '~> 0.10'
+  spec.add_development_dependency 'engine_cart', '~> 1.0'
 end

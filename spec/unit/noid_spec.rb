@@ -13,5 +13,9 @@ describe ActiveFedora::Noid do
     subject { ActiveFedora::Noid.treeify(id) }
     let(:id) { 'abc123def45' }
     it { is_expected.to eq 'ab/c1/23/de/abc123def45' }
+    context 'with a seven-digit identifier' do
+      let(:id) { 'abc123z' }
+      it { is_expected.to eq 'ab/c1/23/z/abc123z' }
+    end
   end
 end

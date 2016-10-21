@@ -1,10 +1,11 @@
 [![Version](https://badge.fury.io/rb/active_fedora-noid.png)](http://badge.fury.io/rb/active_fedora-noid)
+[![Build Status](https://travis-ci.org/projecthydra-labs/active_fedora-noid.png?branch=master)](https://travis-ci.org/projecthydra-labs/active_fedora-noid)
+[![Coverage Status](https://coveralls.io/repos/projecthydra-labs/active_fedora-noid/badge.svg)](https://coveralls.io/r/projecthydra-labs/active_fedora-noid)
+[![Code Climate](https://codeclimate.com/github/projecthydra-labs/active_fedora-noid/badges/gpa.svg)](https://codeclimate.com/github/projecthydra-labs/active_fedora-noid)
+[![Dependency Status](https://gemnasium.com/projecthydra-labs/active_fedora-noid.png)](https://gemnasium.com/projecthydra-labs/active_fedora-noid)
 [![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/active_fedora-noid)
-[![Build Status](https://travis-ci.org/projecthydra-labs/active_fedora-noid.png?branch=master)](https://travis-ci.org/projecthydra-labs/active_fedora-noid)
-[![Dependency Status](https://gemnasium.com/projecthydra-labs/active_fedora-noid.png)](https://gemnasium.com/projecthydra-labs/active_fedora-noid)
-[![Coverage Status](https://coveralls.io/repos/projecthydra-labs/active_fedora-noid/badge.svg)](https://coveralls.io/r/projecthydra-labs/active_fedora-noid)
 
 # ActiveFedora::Noid
 

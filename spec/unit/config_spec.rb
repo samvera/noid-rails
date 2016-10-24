@@ -27,7 +27,7 @@ describe ActiveFedora::Noid::Config do
   end
 
   describe '#minter_class' do
-    let(:default) { ActiveFedora::Noid::Minter::Db }
+    let(:default) { ActiveFedora::Noid::Minter::File }
 
     it 'has a default' do
       expect(subject.minter_class).to eq default

@@ -17,7 +17,7 @@ module ActiveFedora
       end
 
       def minter_class
-        @minter_class ||= Minter::Db
+        @minter_class ||= Minter::File
       end
 
       def translate_uri_to_id

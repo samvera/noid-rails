@@ -97,28 +97,35 @@ This will make sure your objects have Noid-like identifiers (e.g. `bb22bb22b`) t
 
 ## Overriding default behavior
 
-The default minter in ActiveFedora::Noid 2.x is the database-backed minter to better support multi-host production installations that expect a shared database but not necessarily a shared filesystem (e.g., between load-balanced Rails applications).
+The default minter in ActiveFedora::Noid 2.x is the file-backed minter to preserve default behavior.
 
-### Use file-based minter state (for replayability)
+To better support multi-host production installations that expect a shared database but not necessarily a shared filesystem (e.g., between load-balanced Rails applications), we highly recommend swapping in the database-backed minter.
 
-The file-based minter -- which was the default and only minter in 1.x -- creates a Noid and dumps it to a statefile in the /tmp directory. You can override the location or name of this statefile as follows in e.g. `config/initializers/active_fedora-noid.rb`:
+### Use database-based minter state
+
+The database-based minter stores minter state information in your application's relational database. To use it, override the AF::Noid configuration in e.g. `config/initializers/active_fedora-noid.rb`:
 
 ```ruby
 require 'active_fedora/noid'
 
 ActiveFedora::Noid.configure do |config|
-  config.minter_class = ActiveFedora::Noid::Minter::File
-  config.statefile = '/var/foo/bar'
+  config.minter_class = ActiveFedora::Noid::Minter::Db
 end
 ```
 
-**NOTE**: If you switch to a new minter, it will not automatically start with the same state as the old minter. AF::Noid does include a couple of rake tasks for copying state from database-backed minters to file-backed ones and vice versa:
+**NOTE 1**: If you switch to a new minter, it will not automatically start with the same state as the old minter. AF::Noid does include a couple of rake tasks for copying state from database-backed minters to file-backed ones and vice versa:
 
 ``` bash
 # For migrating minter state from a file to a database
 $ rake active_fedora:noid:migrate:file_to_database
 # For migrating minter state from a database to a file
 $ rake active_fedora:noid:migrate:database_to_file
+```
+
+**NOTE 2**: If you decide to use the database-backed minter, you may notice that your test suite now fails miserably if it is configured to clear out the application database between tests. If so, you may add the following to e.g. `spec/spec_helper.rb` to set the default minter in the test suite as the file-backed one:
+
+``` ruby
+require 'active_fedora/noid/rspec'
 ```
 
 ### Identifier template

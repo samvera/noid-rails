@@ -1,5 +1,5 @@
 module ActiveFedora
   module Noid
-    VERSION = '2.0.0.beta4'.freeze
+    VERSION = '2.0.0.beta5'.freeze
   end
 end

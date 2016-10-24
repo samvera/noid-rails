@@ -21,7 +21,7 @@ Override your ActiveFedora-based applications with opaque [Noid](https://wiki.uc
     * [ActiveFedora integration](#activefedora-integration)
       * [Identifier/URI translation](#identifieruri-translation)
     * [Overriding default behavior](#overriding-default-behavior)
-      * [Minter state (for replayability)](#minter-state-for-replayability)
+      * [Use database-based minter state](#use-database-based-minter-state)
       * [Identifier template](#identifier-template)
       * [Custom minters](#custom-minters)
   * [Help](#help)
@@ -103,7 +103,13 @@ To better support multi-host production installations that expect a shared datab
 
 ### Use database-based minter state
 
-The database-based minter stores minter state information in your application's relational database. To use it, override the AF::Noid configuration in e.g. `config/initializers/active_fedora-noid.rb`:
+The database-based minter stores minter state information in your application's relational database. To use it, you'll first need to run the install generator:
+
+```bash
+$ rails generate active_fedora:noid:install
+```
+
+This will create the necessary database tables and seed the database minter. To start minting identifiers with the new minter, override the AF::Noid configuration in e.g. `config/initializers/active_fedora-noid.rb`:
 
 ```ruby
 require 'active_fedora/noid'

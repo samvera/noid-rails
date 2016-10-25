@@ -21,7 +21,7 @@ RSpec/ExampleLength:
     - 'spec/unit/db_minter_spec.rb'
     - 'spec/unit/file_minter_spec.rb'
 
-# Offense count: 5
+# Offense count: 6
 # Configuration parameters: CustomTransform.
 RSpec/FilePath:
   Exclude:
@@ -30,12 +30,18 @@ RSpec/FilePath:
     - 'spec/unit/file_minter_spec.rb'
     - 'spec/unit/noid_spec.rb'
     - 'spec/unit/service_spec.rb'
+    - 'spec/unit/rspec_spec.rb'
 
 # Offense count: 9
 RSpec/LeadingSubject:
   Exclude:
     - 'spec/unit/config_spec.rb'
     - 'spec/unit/file_minter_spec.rb'
+
+# Offense count: 3
+RSpec/InstanceVariable:
+  Exclude:
+    - 'spec/unit/rspec_spec.rb'
 
 # Offense count: 4
 RSpec/MessageChain:
@@ -64,12 +70,13 @@ RSpec/NamedSubject:
     - 'spec/unit/noid_spec.rb'
     - 'spec/unit/service_spec.rb'
 
-# Offense count: 11
+# Offense count: 12
 # Configuration parameters: MaxNesting.
 RSpec/NestedGroups:
   Exclude:
     - 'spec/unit/config_spec.rb'
     - 'spec/unit/noid_spec.rb'
+    - 'spec/unit/rspec_spec.rb'
 
 # Offense count: 3
 # Configuration parameters: IgnoreSymbolicNames.

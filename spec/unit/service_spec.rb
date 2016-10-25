@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 describe ActiveFedora::Noid::Service do
   describe 'public API' do
     it { is_expected.to respond_to(:valid?) }
@@ -11,7 +12,7 @@ describe ActiveFedora::Noid::Service do
   context 'with a custom minter' do
     let(:minter) { double('minter') }
     let(:identifier) { 'abc123' }
-    let(:new_service) { ActiveFedora::Noid::Service.new(minter) }
+    let(:new_service) { described_class.new(minter) }
 
     it 'allows injecting a custom minter' do
       expect(new_service.minter).to eq minter

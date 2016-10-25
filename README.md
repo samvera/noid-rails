@@ -1,11 +1,13 @@
-[![Version](https://badge.fury.io/rb/active_fedora-noid.png)](http://badge.fury.io/rb/active_fedora-noid)
+Code: [![Version](https://badge.fury.io/rb/active_fedora-noid.png)](http://badge.fury.io/rb/active_fedora-noid)
 [![Build Status](https://travis-ci.org/projecthydra-labs/active_fedora-noid.png?branch=master)](https://travis-ci.org/projecthydra-labs/active_fedora-noid)
-[![Coverage Status](https://coveralls.io/repos/projecthydra-labs/active_fedora-noid/badge.svg)](https://coveralls.io/r/projecthydra-labs/active_fedora-noid)
+[![Coverage Status](https://coveralls.io/repos/github/projecthydra-labs/active_fedora-noid/badge.svg?branch=master)](https://coveralls.io/github/projecthydra-labs/active_fedora-noid?branch=master)
 [![Code Climate](https://codeclimate.com/github/projecthydra-labs/active_fedora-noid/badges/gpa.svg)](https://codeclimate.com/github/projecthydra-labs/active_fedora-noid)
 [![Dependency Status](https://gemnasium.com/projecthydra-labs/active_fedora-noid.png)](https://gemnasium.com/projecthydra-labs/active_fedora-noid)
-[![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
-[![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
+
+Docs: [![Documentation Status](https://inch-ci.org/github/projecthydra-labs/active_fedora-noid.svg?branch=master)](https://inch-ci.org/github/projecthydra-labs/active_fedora-noid)
 [![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/active_fedora-noid)
+[![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
+[![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 
 # ActiveFedora::Noid
 
@@ -188,11 +190,11 @@ And the service will delegate minting and validating to an instance of your cust
 
 # Help
 
-If you have questions or need help, please email [the Hydra community tech list](mailto:hydra-tech@googlegroups.com) or stop by [the Hydra community IRC channel](irc://irc.freenode.net/projecthydra).
+If you have questions or need help, please email [the Hydra community tech list](mailto:hydra-tech@googlegroups.com) or stop by the #dev channel in [the Hydra community Slack team](https://wiki.duraspace.org/pages/viewpage.action?pageId=43910187#Getintouch!-Slack): [![Slack Status](http://slack.projecthydra.org/badge.svg)](http://slack.projecthydra.org/)
 
 # Acknowledgments
 
 This software has been developed by and is brought to you by the Hydra community.  Learn more at the
-[Project Hydra website](http://projecthydra.org)
+[Project Hydra website](http://projecthydra.org/).
 
-![Project Hydra Logo](https://github.com/uvalib/libra-oa/blob/a6564a9e5c13b7873dc883367f5e307bf715d6cf/public/images/powered_by_hydra.png?raw=true)
+![Project Hydra Logo](http://sufia.io/assets/images/hydra_logo.png)

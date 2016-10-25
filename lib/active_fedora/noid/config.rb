@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ActiveFedora
   module Noid
     class Config
@@ -39,7 +40,7 @@ module ActiveFedora
       end
 
       def baseparts
-        2 + [(template.gsub(/\.[rsz]/,'').length.to_f/2).ceil, 4].min
+        2 + [(template.gsub(/\.[rsz]/, '').length.to_f / 2).ceil, 4].min
       end
     end
   end

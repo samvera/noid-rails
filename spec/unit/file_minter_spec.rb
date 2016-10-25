@@ -1,5 +1,6 @@
+# frozen_string_literal: true
 describe ActiveFedora::Noid::Minter::File do
-  before :each do
+  before do
     # default novel mintings
     allow(ActiveFedora::Base).to receive(:exists?).and_return(false)
     allow(ActiveFedora::Base).to receive(:gone?).and_return(false)
@@ -47,12 +48,11 @@ describe ActiveFedora::Noid::Minter::File do
     before { minter.mint }
     it 'changes the state of the minter' do
       expect { subject.write!(minter) }.to change { subject.read[:seq] }
-                                           .from(starting_state[:seq]).to(minter.seq)
-                                       .and change { subject.read[:rand] }
-                                           .from(starting_state[:rand]).to(Marshal.dump(minter.instance_variable_get(:@rand)))
-                                       .and change { subject.read[:counters] }
-                                           .to(minter.counters)
-
+        .from(starting_state[:seq]).to(minter.seq)
+        .and change { subject.read[:rand] }
+        .from(starting_state[:rand]).to(Marshal.dump(minter.instance_variable_get(:@rand)))
+        .and change { subject.read[:counters] }
+        .to(minter.counters)
     end
   end
 end

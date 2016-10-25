@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class CreateMinterStates < ActiveRecord::Migration
   def change
     create_table :minter_states do |t|

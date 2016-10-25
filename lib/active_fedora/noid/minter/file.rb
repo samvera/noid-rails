@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'noid'
 
 module ActiveFedora
@@ -32,7 +33,7 @@ module ActiveFedora
         protected
 
         def with_file
-          ::File.open(statefile, 'a+b', 0644) do |f|
+          ::File.open(statefile, 'a+b', 0o644) do |f|
             f.flock(::File::LOCK_EX)
             # Files opened in append mode seek to end of file
             f.rewind

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'noid'
 require 'active_fedora'
 
@@ -20,7 +21,7 @@ module ActiveFedora
         # @return [String] the minted identifier
         def mint
           Mutex.new.synchronize do
-            while true
+            loop do
               pid = next_id
               return pid unless ActiveFedora::Base.exists?(pid) || ActiveFedora::Base.gone?(pid)
             end
@@ -30,7 +31,7 @@ module ActiveFedora
         ##
         # @return [Hash] an object representing the current minter state
         def read
-          raise NotImplementedError.new('Implement #read in child class')
+          raise NotImplementedError, 'Implement #read in child class'
         end
 
         ##
@@ -40,7 +41,7 @@ module ActiveFedora
         #
         # @return [void]
         def write!(_)
-          raise NotImplementedError.new('Implement #write! in child class')
+          raise NotImplementedError, 'Implement #write! in child class'
         end
 
         protected
@@ -54,7 +55,7 @@ module ActiveFedora
         ##
         # @return [String] a new identifier.
         def next_id
-          raise NotImplementedError.new('Implement #next_id in child class')
+          raise NotImplementedError, 'Implement #next_id in child class'
         end
       end
     end

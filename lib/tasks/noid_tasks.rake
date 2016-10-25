@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'active_fedora/noid'
 require 'noid'
 require 'yaml'
@@ -10,7 +11,7 @@ namespace :active_fedora do
         statefile = ENV.fetch('AFNOID_STATEFILE', ActiveFedora::Noid.config.statefile)
         raise "File not found: #{statefile}\nAborting" unless File.exist?(statefile)
         puts "Migrating #{statefile} from YAML to Marshal serialization..."
-        File.open(statefile, 'a+b', 0644) do |f|
+        File.open(statefile, 'a+b', 0o644) do |f|
           f.flock(File::LOCK_EX)
           f.rewind
           begin
@@ -23,7 +24,7 @@ namespace :active_fedora do
           new_state = Marshal.dump(minter.dump)
           f.write(new_state)
         end
-        puts "Done!"
+        puts 'Done!'
       end
 
       desc 'Migrate minter state from file to database'
@@ -35,7 +36,7 @@ namespace :active_fedora do
         minter = Noid::Minter.new(state)
         new_state = ActiveFedora::Noid::Minter::Db.new
         new_state.write!(minter)
-        puts "Done!"
+        puts 'Done!'
       end
 
       desc 'Migrate minter state from database to file'
@@ -47,7 +48,7 @@ namespace :active_fedora do
         minter = Noid::Minter.new(state)
         new_state = ActiveFedora::Noid::Minter::File.new
         new_state.write!(minter)
-        puts "Done!"
+        puts 'Done!'
       end
     end
   end

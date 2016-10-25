@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 shared_examples 'a minter' do
   describe '#mint' do
     subject     { minter.mint }
@@ -27,7 +28,7 @@ shared_examples 'a minter' do
     let(:existing_pid) { 'ef12ef12f' }
     let(:unique_pid)   { 'bb22bb22b' }
 
-    before :each do
+    before do
       expect(subject).to receive(:next_id).and_return(existing_pid, unique_pid)
     end
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'active_fedora/noid/version'
 require 'active_fedora/noid/config'
 require 'active_fedora/noid/engine'
@@ -7,7 +8,7 @@ require 'active_fedora/noid/minter'
 module ActiveFedora
   module Noid
     class << self
-      def configure(&block)
+      def configure
         yield config
       end
 

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class MinterState < ActiveRecord::Base
   validates :namespace, presence: true, uniqueness: true
   validates :template, presence: true

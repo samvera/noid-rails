@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'noid'
 
 module ActiveFedora
@@ -9,13 +10,9 @@ module ActiveFedora
         @minter = minter
       end
 
-      def valid?(identifier)
-        minter.valid? identifier
-      end
+      delegate :valid?, to: :minter
 
-      def mint
-        minter.mint
-      end
+      delegate :mint, to: :minter
 
       protected
 

@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 include MinterStateHelper
 
 describe ActiveFedora::Noid::Minter::Db do
-  before(:each) { reset_minter_state_table }
+  before { reset_minter_state_table }
   after(:all) { reset_minter_state_table }
 
-  before :each do
+  before do
     # default novel mintings
     allow(ActiveFedora::Base).to receive(:exists?).and_return(false)
     allow(ActiveFedora::Base).to receive(:gone?).and_return(false)
@@ -18,8 +19,8 @@ describe ActiveFedora::Noid::Minter::Db do
 
   describe '#initialize' do
     it 'raises on bad templates' do
-      expect{ described_class.new('reeddeeddk') }.to raise_error(Noid::TemplateError)
-      expect{ described_class.new('')           }.to raise_error(Noid::TemplateError)
+      expect { described_class.new('reeddeeddk') }.to raise_error(Noid::TemplateError)
+      expect { described_class.new('')           }.to raise_error(Noid::TemplateError)
     end
     it 'returns object w/ default template' do
       expect(subject).to be_instance_of described_class
@@ -53,11 +54,11 @@ describe ActiveFedora::Noid::Minter::Db do
     before { minter.mint }
     it 'changes the state of the minter' do
       expect { subject.write!(minter) }.to change { subject.read[:seq] }
-                                           .from(starting_state[:seq]).to(minter.seq)
-                                       .and change { subject.read[:counters] }
-                                           .from(starting_state[:counters]).to(minter.counters)
-                                       .and change { subject.read[:rand] }
-                                           .from(starting_state[:rand]).to(Marshal.dump(minter.instance_variable_get(:@rand)))
+        .from(starting_state[:seq]).to(minter.seq)
+        .and change { subject.read[:counters] }
+        .from(starting_state[:counters]).to(minter.counters)
+        .and change { subject.read[:rand] }
+        .from(starting_state[:rand]).to(Marshal.dump(minter.instance_variable_get(:@rand)))
     end
   end
 end

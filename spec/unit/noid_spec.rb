@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 describe ActiveFedora::Noid do
   describe '#configure' do
     it { is_expected.to respond_to(:configure) }
@@ -10,7 +11,7 @@ describe ActiveFedora::Noid do
   end
 
   describe '#treeify' do
-    subject { ActiveFedora::Noid.treeify(id) }
+    subject { described_class.treeify(id) }
     let(:id) { 'abc123def45' }
     it { is_expected.to eq 'ab/c1/23/de/abc123def45' }
     context 'with a seven-digit identifier' do

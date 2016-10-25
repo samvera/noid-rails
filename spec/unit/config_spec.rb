@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 describe ActiveFedora::Noid::Config do
   subject { described_class.new }
 
@@ -45,23 +46,23 @@ describe ActiveFedora::Noid::Config do
   describe '#translate_uri_to_id' do
     let(:config) { described_class.new }
     let(:translator) { config.translate_uri_to_id }
-    let(:uri) { "http://localhost:8983/fedora/rest/test/hh/63/vz/22/hh63vz22q/members" }
+    let(:uri) { 'http://localhost:8983/fedora/rest/test/hh/63/vz/22/hh63vz22q/members' }
     let(:ActiveFedora) { double(ActiveFedora) }
     subject { translator.call(uri) }
     before do
-      allow(ActiveFedora).to receive_message_chain("fedora.host") { "http://localhost:8983" }
-      allow(ActiveFedora).to receive_message_chain("fedora.base_path") { "/fedora/rest/test" }
+      allow(ActiveFedora).to receive_message_chain('fedora.host') { 'http://localhost:8983' }
+      allow(ActiveFedora).to receive_message_chain('fedora.base_path') { '/fedora/rest/test' }
     end
 
     it { is_expected.to eq 'hh63vz22q/members' }
 
-    context "with a hash code uri" do
-      let(:uri) { "http://localhost:8983/fedora/rest/test/hh/63/vz/22/hh63vz22q#g123" }
+    context 'with a hash code uri' do
+      let(:uri) { 'http://localhost:8983/fedora/rest/test/hh/63/vz/22/hh63vz22q#g123' }
       it { is_expected.to eq 'hh63vz22q#g123' }
     end
 
     context 'with a short custom template' do
-      let(:uri) { "http://localhost:8983/fedora/rest/test/ab/cd/abcd/members" }
+      let(:uri) { 'http://localhost:8983/fedora/rest/test/ab/cd/abcd/members' }
       let(:custom_template) { '.reeee' }
       before { config.template = custom_template }
       subject { translator.call(uri) }
@@ -70,7 +71,7 @@ describe ActiveFedora::Noid::Config do
     end
 
     context 'with an even shorter custom template' do
-      let(:uri) { "http://localhost:8983/fedora/rest/test/ab/c/abc/members" }
+      let(:uri) { 'http://localhost:8983/fedora/rest/test/ab/c/abc/members' }
       let(:custom_template) { '.reee' }
       before { config.template = custom_template }
       subject { translator.call(uri) }
@@ -79,7 +80,7 @@ describe ActiveFedora::Noid::Config do
     end
 
     context 'with a long custom template' do
-      let(:uri) { "http://localhost:8983/fedora/rest/test/ab/cd/ef/gh/abcdefghijklmnopqrstuvwxyz/members" }
+      let(:uri) { 'http://localhost:8983/fedora/rest/test/ab/cd/ef/gh/abcdefghijklmnopqrstuvwxyz/members' }
       let(:custom_template) { '.reeeeeeeeeeeeeeeeeeeeeeeeee' }
       before { config.template = custom_template }
       subject { translator.call(uri) }
@@ -91,27 +92,27 @@ describe ActiveFedora::Noid::Config do
   describe '#translate_id_to_uri' do
     let(:config) { described_class.new }
     let(:translator) { config.translate_id_to_uri }
-    let(:id) { "hh63vz2/members" }
+    let(:id) { 'hh63vz2/members' }
     let(:ActiveFedora) { double(ActiveFedora) }
     subject { translator.call(id) }
     before do
-      allow(ActiveFedora).to receive_message_chain("fedora.host") { "http://localhost:8983" }
-      allow(ActiveFedora).to receive_message_chain("fedora.base_path") { "/fedora/rest/test" }
+      allow(ActiveFedora).to receive_message_chain('fedora.host') { 'http://localhost:8983' }
+      allow(ActiveFedora).to receive_message_chain('fedora.base_path') { '/fedora/rest/test' }
     end
 
-    it { is_expected.to eq "http://localhost:8983/fedora/rest/test/hh/63/vz/2/hh63vz2/members" }
+    it { is_expected.to eq 'http://localhost:8983/fedora/rest/test/hh/63/vz/2/hh63vz2/members' }
 
-    context "with a hash code id" do
+    context 'with a hash code id' do
       let(:id) { 'hh63vz2#g123' }
-      it { is_expected.to eq "http://localhost:8983/fedora/rest/test/hh/63/vz/2/hh63vz2#g123" }
+      it { is_expected.to eq 'http://localhost:8983/fedora/rest/test/hh/63/vz/2/hh63vz2#g123' }
     end
 
     context 'with a short custom template' do
-      let(:id) { "abcd/members" }
+      let(:id) { 'abcd/members' }
       let(:custom_template) { '.reeee' }
       before { config.template = custom_template }
       subject { translator.call(id) }
-      it { is_expected.to eq "http://localhost:8983/fedora/rest/test/ab/cd/abcd/members" }
+      it { is_expected.to eq 'http://localhost:8983/fedora/rest/test/ab/cd/abcd/members' }
     end
 
     context 'with an even shorter custom template' do
@@ -119,15 +120,15 @@ describe ActiveFedora::Noid::Config do
       let(:custom_template) { '.reee' }
       before { config.template = custom_template }
       subject { translator.call(id) }
-      it { is_expected.to eq "http://localhost:8983/fedora/rest/test/ab/c/abc/members" }
+      it { is_expected.to eq 'http://localhost:8983/fedora/rest/test/ab/c/abc/members' }
     end
 
     context 'with a long custom template' do
-      let(:id) { "abcdefghijklmnopqrstuvwxyz/members" }
+      let(:id) { 'abcdefghijklmnopqrstuvwxyz/members' }
       let(:custom_template) { '.reeeeeeeeeeeeeeeeeeeeeeeeee' }
       before { config.template = custom_template }
       subject { translator.call(id) }
-      it { is_expected.to eq "http://localhost:8983/fedora/rest/test/ab/cd/ef/gh/abcdefghijklmnopqrstuvwxyz/members" }
+      it { is_expected.to eq 'http://localhost:8983/fedora/rest/test/ab/cd/ef/gh/abcdefghijklmnopqrstuvwxyz/members' }
     end
   end
 end

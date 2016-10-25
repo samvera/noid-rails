@@ -1,12 +1,12 @@
+# frozen_string_literal: true
 require 'noid'
 
 module ActiveFedora
   module Noid
     module Minter
       class Db < Base
-
         def read
-          filtered_hash = instance.as_json.select { |key| ['template', 'counters', 'seq', 'rand', 'namespace'].include?(key) }
+          filtered_hash = instance.as_json.select { |key| %w(template counters seq rand namespace).include?(key) }
           filtered_hash['counters'] = JSON.parse(filtered_hash['counters'], symbolize_names: true) if filtered_hash['counters']
           filtered_hash.symbolize_keys
         end
@@ -46,7 +46,7 @@ module ActiveFedora
         def instance
           MinterState.lock.find_by(
             namespace: ActiveFedora::Noid.config.namespace,
-            template: ActiveFedora::Noid.config.template,
+            template: ActiveFedora::Noid.config.template
           )
         end
       end # class Db

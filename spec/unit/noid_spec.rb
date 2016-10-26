@@ -18,5 +18,17 @@ describe ActiveFedora::Noid do
       let(:id) { 'abc123z' }
       it { is_expected.to eq 'ab/c1/23/z/abc123z' }
     end
+    context 'with an empty string' do
+      let(:id) { '' }
+      it 'raises ArgumentError' do
+        expect { subject }.to raise_error(ArgumentError)
+      end
+    end
+    context 'with a nil' do
+      let(:id) { nil }
+      it 'raises ArgumentError' do
+        expect { subject }.to raise_error(ArgumentError)
+      end
+    end
   end
 end

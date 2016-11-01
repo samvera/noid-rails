@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['leftwing@alumni.rutgers.edu']
   spec.summary       = 'Noid identifier services for ActiveFedora-based applications'
   spec.description   = 'Noid identifier services for ActiveFedora-based applications.'
-  spec.homepage      = 'https://github.com/projecthydra-labs/active_fedora-noid'
+  spec.homepage      = 'https://github.com/projecthydra/active_fedora-noid'
   spec.license       = 'Apache2'
 
   spec.files         = `git ls-files -z`.split("\x0")

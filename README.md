@@ -132,8 +132,15 @@ $ rake active_fedora:noid:migrate:database_to_file
 
 **NOTE 2**: If you decide to use the database-backed minter, you may notice that your test suite now fails miserably if it is configured to clear out the application database between tests. If so, you may add the following to e.g. `spec/spec_helper.rb` to set the default minter in the test suite as the file-backed one:
 
-``` ruby
+```ruby
 require 'active_fedora/noid/rspec'
+
+RSpec.configure do |config|
+  config.include(ActiveFedora::Noid::RSpec)
+end
+
+before(:suite) { disable_production_minter! }
+after(:suite)  { enable_production_minter! }
 ```
 
 ### Identifier template

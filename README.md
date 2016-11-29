@@ -99,7 +99,7 @@ This will make sure your objects have Noid-like identifiers (e.g. `bb22bb22b`) t
 
 ## Overriding default behavior
 
-The default minter in ActiveFedora::Noid 2.x is the file-backed minter to preserve default behavior.
+The default minter in ActiveFedora::Noid 2.0.0 is the file-backed minter to preserve default behavior.
 
 To better support multi-host production installations that expect a shared database but not necessarily a shared filesystem (e.g., between load-balanced Rails applications), we highly recommend swapping in the database-backed minter.
 

@@ -137,12 +137,6 @@ after(:suite)  { enable_production_minter! }
 If you switch to the new database-backed minter and want to include in that minter the state of your current file-backed minter, AF::Noid 2.0.0 provides a new rake task that will copy your minter's state from the filesystem to the database:
 
 ```bash
-$ rake active_fedora:noid:migrate:file_to_database
-```
-
-**NOTE 1**: If you switch to a new minter, it will not automatically start with the same state as the old minter. AF::Noid does include a couple of rake tasks for copying state from database-backed minters to file-backed ones and vice versa:
-
-``` bash
 # For migrating minter state from a file to a database
 $ rake active_fedora:noid:migrate:file_to_database
 # For migrating minter state from a database to a file

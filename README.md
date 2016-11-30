@@ -121,16 +121,7 @@ ActiveFedora::Noid.configure do |config|
 end
 ```
 
-**NOTE 1**: If you switch to a new minter, it will not automatically start with the same state as the old minter. AF::Noid does include a couple of rake tasks for copying state from database-backed minters to file-backed ones and vice versa:
-
-``` bash
-# For migrating minter state from a file to a database
-$ rake active_fedora:noid:migrate:file_to_database
-# For migrating minter state from a database to a file
-$ rake active_fedora:noid:migrate:database_to_file
-```
-
-**NOTE 2**: If you decide to use the database-backed minter, you may notice that your test suite now fails miserably if it is configured to clear out the application database between tests. If so, you may add the following to e.g. `spec/spec_helper.rb` to set the default minter in the test suite as the file-backed one:
+Using the database-backed minter can cause problems with your test suite, where it is often sensible to wipe out database rows between tests (which destroys the database-backed minter's state, which renders it unusable). To deal with this and still get the benefits of using the database-backed minter in development and production environments, you'll also want to add the following helper to your `spec/spec_helper.rb`:
 
 ```ruby
 require 'active_fedora/noid/rspec'
@@ -141,6 +132,15 @@ end
 
 before(:suite) { disable_production_minter! }
 after(:suite)  { enable_production_minter! }
+```
+
+If you switch to the new database-backed minter and want to include in that minter the state of your current file-backed minter, AF::Noid 2.0.0 provides a new rake task that will copy your minter's state from the filesystem to the database:
+
+```bash
+# For migrating minter state from a file to a database
+$ rake active_fedora:noid:migrate:file_to_database
+# For migrating minter state from a database to a file
+$ rake active_fedora:noid:migrate:database_to_file
 ```
 
 ### Identifier template

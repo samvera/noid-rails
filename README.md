@@ -127,11 +127,11 @@ Using the database-backed minter can cause problems with your test suite, where 
 require 'active_fedora/noid/rspec'
 
 RSpec.configure do |config|
-  config.include(ActiveFedora::Noid::RSpec)
-end
+  include ActiveFedora::Noid::RSpec
 
-before(:suite) { disable_production_minter! }
-after(:suite)  { enable_production_minter! }
+  config.before(:suite) { disable_production_minter! }
+  config.after(:suite)  { enable_production_minter! }
+end
 ```
 
 If you switch to the new database-backed minter and want to include in that minter the state of your current file-backed minter, AF::Noid 2.0.0 provides a new rake task that will copy your minter's state from the filesystem to the database:

@@ -99,7 +99,7 @@ This will make sure your objects have Noid-like identifiers (e.g. `bb22bb22b`) t
 
 ## Overriding default behavior
 
-The default minter in ActiveFedora::Noid 2.0.0 is the file-backed minter to preserve default behavior.
+The default minter in ActiveFedora::Noid 2.x is the file-backed minter to preserve default behavior.
 
 To better support multi-host production installations that expect a shared database but not necessarily a shared filesystem (e.g., between load-balanced Rails applications), we highly recommend swapping in the database-backed minter.
 
@@ -134,7 +134,7 @@ RSpec.configure do |config|
 end
 ```
 
-If you switch to the new database-backed minter and want to include in that minter the state of your current file-backed minter, AF::Noid 2.0.0 provides a new rake task that will copy your minter's state from the filesystem to the database:
+If you switch to the new database-backed minter and want to include in that minter the state of your current file-backed minter, AF::Noid 2.x provides a new rake task that will copy your minter's state from the filesystem to the database:
 
 ```bash
 # For migrating minter state from a file to a database

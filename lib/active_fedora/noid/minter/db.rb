@@ -44,7 +44,12 @@ module ActiveFedora
         end
 
         def instance
-          MinterState.lock.find_by(
+          MinterState.lock.find_by!(
+            namespace: ActiveFedora::Noid.config.namespace,
+            template: ActiveFedora::Noid.config.template
+          )
+        rescue ActiveRecord::RecordNotFound
+          MinterState.seed!(
             namespace: ActiveFedora::Noid.config.namespace,
             template: ActiveFedora::Noid.config.template
           )

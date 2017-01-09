@@ -7,3 +7,6 @@ AllCops:
 
 Rails:
   Enabled: true
+
+RSpec/NestedGroups:
+  MaxNesting: 4

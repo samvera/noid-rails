@@ -4,6 +4,7 @@ include MinterStateHelper
 describe ActiveFedora::Noid::Minter::Db do
   before { reset_minter_state_table }
   after(:all) { reset_minter_state_table }
+  subject(:db_minter) { described_class.new }
 
   before do
     # default novel mintings
@@ -11,10 +12,8 @@ describe ActiveFedora::Noid::Minter::Db do
     allow(ActiveFedora::Base).to receive(:gone?).and_return(false)
   end
 
-  let(:other) { described_class.new('.reedddk') }
-
   it_behaves_like 'a minter' do
-    let(:minter) { described_class.new }
+    let(:minter) { db_minter }
   end
 
   describe '#initialize' do
@@ -23,41 +22,54 @@ describe ActiveFedora::Noid::Minter::Db do
       expect { described_class.new('')           }.to raise_error(Noid::TemplateError)
     end
     it 'returns object w/ default template' do
-      expect(subject).to be_instance_of described_class
-      expect(subject).to be_a Noid::Minter
-      expect(subject.template).to be_instance_of Noid::Template
-      expect(subject.template.to_s).to eq ActiveFedora::Noid.config.template
+      expect(db_minter).to be_instance_of described_class
+      expect(db_minter).to be_a Noid::Minter
+      expect(db_minter.template).to be_instance_of Noid::Template
+      expect(db_minter.template.to_s).to eq ActiveFedora::Noid.config.template
     end
-    it 'accepts valid template arg' do
-      expect(other).to be_instance_of described_class
-      expect(other).to be_a Noid::Minter
-      expect(other.template).to be_instance_of Noid::Template
-      expect(other.template.to_s).to eq '.reedddk'
+    context 'with a user provided template' do
+      let(:db_minter) { described_class.new('.reedddk') }
+
+      it 'accepts valid template arg' do
+        expect(db_minter).to be_instance_of described_class
+        expect(db_minter).to be_a Noid::Minter
+        expect(db_minter.template).to be_instance_of Noid::Template
+        expect(db_minter.template.to_s).to eq '.reedddk'
+      end
     end
   end
 
   describe '#read' do
-    it 'returns a hash' do
-      expect(subject.read).to be_a(Hash)
+    subject { db_minter.read }
+
+    context 'when the database has been initialized' do
+      it 'has the expected namespace and template' do
+        expect(subject).to include(namespace: ActiveFedora::Noid.config.namespace,
+                                   template: ActiveFedora::Noid.config.template)
+      end
     end
-    it 'has the expected namespace' do
-      expect(subject.read[:namespace]).to eq ActiveFedora::Noid.config.namespace
-    end
-    it 'has the expected template' do
-      expect(subject.read[:template]).to eq ActiveFedora::Noid.config.template
+
+    context 'when the database has not been initialized' do
+      before do
+        MinterState.destroy_all
+      end
+      it 'has the expected namespace and template' do
+        expect(subject).to include(namespace: ActiveFedora::Noid.config.namespace,
+                                   template: ActiveFedora::Noid.config.template)
+      end
     end
   end
 
   describe '#write!' do
-    let(:starting_state) { subject.read }
+    let(:starting_state) { db_minter.read }
     let(:minter) { Noid::Minter.new(starting_state) }
     before { minter.mint }
     it 'changes the state of the minter' do
-      expect { subject.write!(minter) }.to change { subject.read[:seq] }
+      expect { db_minter.write!(minter) }.to change { db_minter.read[:seq] }
         .from(starting_state[:seq]).to(minter.seq)
-        .and change { subject.read[:counters] }
+        .and change { db_minter.read[:counters] }
         .from(starting_state[:counters]).to(minter.counters)
-        .and change { subject.read[:rand] }
+        .and change { db_minter.read[:rand] }
         .from(starting_state[:rand]).to(Marshal.dump(minter.instance_variable_get(:@rand)))
     end
   end

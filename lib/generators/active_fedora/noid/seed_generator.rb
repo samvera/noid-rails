@@ -20,7 +20,7 @@ Seeds DB from ActiveFedora::Noid.config (or command-line overrides)
       end
 
       def seed_row
-        MinterState.create!(
+        MinterState.seed!(
           namespace: namespace,
           template: template
         )

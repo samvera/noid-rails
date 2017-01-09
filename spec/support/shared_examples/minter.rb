@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 shared_examples 'a minter' do
   describe '#mint' do
-    subject     { minter.mint }
-    let(:other) { described_class.new('.reedddk') }
+    subject { minter.mint }
 
     it { is_expected.not_to be_empty }
 
@@ -19,8 +18,11 @@ shared_examples 'a minter' do
       expect(described_class.new('.reedddk').valid?(subject)).to be false
     end
 
-    it 'is invalid under a different template' do
-      expect(other).not_to be_valid(minter.mint)
+    context 'with a different template' do
+      let(:other) { described_class.new('.reedddk') }
+      it 'is invalid under a different template' do
+        expect(other).not_to be_valid(minter.mint)
+      end
     end
   end
 

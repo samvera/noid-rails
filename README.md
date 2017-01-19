@@ -111,7 +111,11 @@ The database-based minter stores minter state information in your application's 
 $ rails generate active_fedora:noid:install
 ```
 
-This will create the necessary database tables and seed the database minter. To start minting identifiers with the new minter, override the AF::Noid configuration in e.g. `config/initializers/active_fedora-noid.rb`:
+This will create the necessary database migrations.
+
+Then run `rake db:migrate`
+
+To start minting identifiers with the new minter, override the AF::Noid configuration in e.g. `config/initializers/active_fedora-noid.rb`:
 
 ```ruby
 require 'active_fedora/noid'

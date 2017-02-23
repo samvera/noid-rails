@@ -64,13 +64,23 @@ describe ActiveFedora::Noid::Minter::Db do
     let(:starting_state) { db_minter.read }
     let(:minter) { Noid::Minter.new(starting_state) }
     before { minter.mint }
+
     it 'changes the state of the minter' do
-      expect { db_minter.write!(minter) }.to change { db_minter.read[:seq] }
-        .from(starting_state[:seq]).to(minter.seq)
-        .and change { db_minter.read[:counters] }
-        .from(starting_state[:counters]).to(minter.counters)
-        .and change { db_minter.read[:rand] }
-        .from(starting_state[:rand]).to(Marshal.dump(minter.instance_variable_get(:@rand)))
+      expect { db_minter.write!(minter) }
+        .to  change { db_minter.read[:seq]      }.from(starting_state[:seq]).to(minter.seq)
+        .and change { db_minter.read[:counters] }.from(starting_state[:counters]).to(minter.counters)
+        .and change { db_minter.read[:rand]     }.from(starting_state[:rand]).to(Marshal.dump(minter.instance_variable_get(:@rand)))
+    end
+  end
+
+  describe '#next_id' do
+    let(:stub_minter) { described_class.new }
+    let(:locked) { MinterState }
+
+    it 'locks DB row and does not query twice' do
+      expect(MinterState).to receive(:lock).and_return(locked).once
+      expect(locked).to receive(:find_by!).once.and_return(MinterState.first)
+      stub_minter.send(:next_id)
     end
   end
 end

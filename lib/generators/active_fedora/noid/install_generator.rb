@@ -14,11 +14,6 @@ Copies DB migrations
 
       def migrations
         rake 'active_fedora_noid_engine:install:migrations'
-        rake 'db:migrate'
-      end
-
-      def seed
-        generate 'active_fedora:noid:seed'
       end
     end
   end

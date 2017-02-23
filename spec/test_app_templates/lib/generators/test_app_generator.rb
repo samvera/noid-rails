@@ -10,5 +10,6 @@ class TestAppGenerator < Rails::Generators::Base
 
   def install_engine
     generate 'active_fedora:noid:install'
+    rake 'db:migrate'
   end
 end

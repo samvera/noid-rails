@@ -14,14 +14,9 @@ shared_examples 'a minter' do
       expect(described_class.new.valid?(subject)).to be true
     end
 
-    it 'is invalid under a different template' do
-      expect(described_class.new('.reedddk').valid?(subject)).to be false
-    end
-
     context 'with a different template' do
-      let(:other) { described_class.new('.reedddk') }
-      it 'is invalid under a different template' do
-        expect(other).not_to be_valid(minter.mint)
+      it 'is invalid' do
+        expect(described_class.new('.reedddk').valid?(subject)).to be false
       end
     end
   end

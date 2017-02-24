@@ -43,6 +43,10 @@ describe ActiveFedora::Noid::Minter::Db do
     subject { db_minter.read }
 
     context 'when the database has been initialized' do
+      it 'does not lock the DB' do
+        expect(MinterState).not_to receive(:lock)
+        subject # have to call it to trigger above
+      end
       it 'has the expected namespace and template' do
         expect(subject).to include(namespace: ActiveFedora::Noid.config.namespace,
                                    template: ActiveFedora::Noid.config.template)

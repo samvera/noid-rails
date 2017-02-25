@@ -6,27 +6,40 @@ module ActiveFedora
     module Minter
       class Db < Base
         def read
-          filtered_hash = instance.as_json.select { |key| %w(template counters seq rand namespace).include?(key) }
+          deserialize(instance)
+        end
+
+        def write!(minter)
+          serialize(instance, minter)
+        end
+
+        protected
+
+        # @param [MinterState] inst minter state to be converted
+        # @return [Hash{Symbol => String, Object}] minter state as a Hash, like #read
+        # @see #read, ActiveFedora::Noid::Minter::Base#read
+        def deserialize(inst)
+          filtered_hash = inst.as_json.slice(*%w(template counters seq rand namespace))
           filtered_hash['counters'] = JSON.parse(filtered_hash['counters'], symbolize_names: true) if filtered_hash['counters']
           filtered_hash.symbolize_keys
         end
 
-        def write!(minter)
+        # @param [MinterState] inst a locked row/object to be updated
+        # @param [::Noid::Minter] minter state containing the updates
+        def serialize(inst, minter)
           # namespace and template are the same, now update the other attributes
-          instance.update_attributes!(
+          inst.update_attributes!(
             seq: minter.seq,
             counters: JSON.generate(minter.counters),
             rand: Marshal.dump(minter.instance_variable_get(:@rand))
           )
         end
 
-        protected
-
         # Uses pessimistic lock to ensure the record fetched is the same one updated.
         # Should be fast enough to avoid terrible deadlock.
         # Must lock because of multi-connection context! (transaction is per connection -- not enough)
         # The DB table will only ever have at most one row per namespace.
-        # The 'default' namespace row is inserted by `rails generate active_fedora:noid:seed`.
+        # The 'default' namespace row is inserted by `rails generate active_fedora:noid:seed` or autofilled by instance below.
         # If you want another namespace, edit your config initialzer to something like:
         #     ActiveFedora::Noid.config.namespace = 'druid'
         #     ActiveFedora::Noid.config.template = '.reeedek'
@@ -35,14 +48,15 @@ module ActiveFedora
         def next_id
           id = nil
           MinterState.transaction do
-            state = read
-            minter = ::Noid::Minter.new(state)
+            locked = instance
+            minter = ::Noid::Minter.new(deserialize(locked))
             id = minter.mint
-            write!(minter)
+            serialize(locked, minter)
           end # transaction
           id
         end
 
+        # @return [MinterState]
         def instance
           MinterState.lock.find_by!(
             namespace: ActiveFedora::Noid.config.namespace,

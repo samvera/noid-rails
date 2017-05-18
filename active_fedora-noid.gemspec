@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'active-fedora', '>= 9.7', '< 12'
   spec.add_dependency 'noid', '~> 0.9'
-  spec.add_dependency 'rails', '>= 4.2.7.1', '< 6'
+  spec.add_dependency 'rails', '>= 5.0.0', '< 6'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'rake', '>= 11'

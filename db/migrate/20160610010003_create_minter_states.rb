@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class CreateMinterStates < ActiveRecord::Migration
+class CreateMinterStates < ActiveRecord::Migration[4.2]
   def change
     create_table :minter_states do |t|
       t.string :namespace, null: false, default: 'default'

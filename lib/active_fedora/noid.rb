@@ -4,6 +4,7 @@ require 'active_fedora/noid/config'
 require 'active_fedora/noid/engine'
 require 'active_fedora/noid/service'
 require 'active_fedora/noid/minter'
+require 'active_fedora/noid/model'
 
 module ActiveFedora
   module Noid

@@ -63,26 +63,14 @@ noid_service.valid? 'xyz123foobar'
 
 ## ActiveFedora integration
 
-To get ActiveFedora to automatically call your Noid service whenever a new ActiveFedora object is saved, create a method on your model called `assign_id` and have it talk to your Noid service, e.g.:
+To get ActiveFedora to automatically call your Noid service whenever a new ActiveFedora object is saved, include the `ActiveFedora::Noid::Model`, e.g.:
 
 ```ruby
 # app/models/my_object.rb
 require 'active_fedora/noid'
 
 class MyObject < ActiveFedora::Base
-  # ...
-
-  def assign_id
-    noid_service.mint
-  end
-
-  # ...
-
-  private
-
-    def noid_service
-      @noid_service ||= ActiveFedora::Noid::Service.new
-    end
+  include ActiveFedora::Noid::Model
 end
 ```
 

@@ -1,9 +1,13 @@
 # frozen_string_literal: true
+
 require 'noid'
 
-module ActiveFedora
-  module Noid
+module Noid
+  module Rails
     module Minter
+      # A minter backed by a database table. You would select this if you
+      # need to mint identifers on several distributed front-ends that do not
+      # share a common file system.
       class Db < Base
         def read
           deserialize(instance)
@@ -17,10 +21,13 @@ module ActiveFedora
 
         # @param [MinterState] inst minter state to be converted
         # @return [Hash{Symbol => String, Object}] minter state as a Hash, like #read
-        # @see #read, ActiveFedora::Noid::Minter::Base#read
+        # @see #read, Noid::Rails::Minter::Base#read
         def deserialize(inst)
-          filtered_hash = inst.as_json.slice(*%w(template counters seq rand namespace))
-          filtered_hash['counters'] = JSON.parse(filtered_hash['counters'], symbolize_names: true) if filtered_hash['counters']
+          filtered_hash = inst.as_json.slice('template', 'counters', 'seq', 'rand', 'namespace')
+          if filtered_hash['counters']
+            filtered_hash['counters'] = JSON.parse(filtered_hash['counters'],
+                                                   symbolize_names: true)
+          end
           filtered_hash.symbolize_keys
         end
 
@@ -39,12 +46,13 @@ module ActiveFedora
         # Should be fast enough to avoid terrible deadlock.
         # Must lock because of multi-connection context! (transaction is per connection -- not enough)
         # The DB table will only ever have at most one row per namespace.
-        # The 'default' namespace row is inserted by `rails generate active_fedora:noid:seed` or autofilled by instance below.
+        # The 'default' namespace row is inserted by `rails generate noid:rails:seed`
+        # or autofilled by instance below.
         # If you want another namespace, edit your config initialzer to something like:
-        #     ActiveFedora::Noid.config.namespace = 'druid'
-        #     ActiveFedora::Noid.config.template = '.reeedek'
+        #     Noid::Rails.config.namespace = 'druid'
+        #     Noid::Rails.config.template = '.reeedek'
         # and in your app run:
-        #     bundle exec rails generate active_fedora:noid:seed
+        #     bundle exec rails generate noid:rails:seed
         def next_id
           id = nil
           MinterState.transaction do
@@ -52,23 +60,23 @@ module ActiveFedora
             minter = ::Noid::Minter.new(deserialize(locked))
             id = minter.mint
             serialize(locked, minter)
-          end # transaction
+          end
           id
         end
 
         # @return [MinterState]
         def instance
           MinterState.lock.find_by!(
-            namespace: ActiveFedora::Noid.config.namespace,
-            template: ActiveFedora::Noid.config.template
+            namespace: Noid::Rails.config.namespace,
+            template: Noid::Rails.config.template
           )
         rescue ActiveRecord::RecordNotFound
           MinterState.seed!(
-            namespace: ActiveFedora::Noid.config.namespace,
-            template: ActiveFedora::Noid.config.template
+            namespace: Noid::Rails.config.namespace,
+            template: Noid::Rails.config.template
           )
         end
-      end # class Db
+      end
     end
   end
 end

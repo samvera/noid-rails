@@ -5,8 +5,20 @@ AllCops:
   TargetRubyVersion: 2.3
   DisplayCopNames: true
 
+Bundler/DuplicatedGem:
+  Enabled: false
+
 Rails:
   Enabled: true
 
 RSpec/NestedGroups:
-  MaxNesting: 4
+  Max: 4
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - 'lib/tasks/**/*.rake'
+
+Naming/FileName:
+  Exclude:
+    - 'lib/noid-rails.rb'

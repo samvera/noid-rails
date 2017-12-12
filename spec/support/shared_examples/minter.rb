@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 shared_examples 'a minter' do
   describe '#mint' do
     subject { minter.mint }
@@ -21,33 +22,18 @@ shared_examples 'a minter' do
     end
   end
 
-  context 'conflicts' do
-    let(:existing_pid) { 'ef12ef12f' }
-    let(:unique_pid)   { 'bb22bb22b' }
+  context 'when the id already exists' do
+    let(:existing_id) { 'ef12ef12f' }
+    let(:unique_id) { 'bb22bb22b' }
 
     before do
-      expect(subject).to receive(:next_id).and_return(existing_pid, unique_pid)
+      expect(subject).to receive(:next_id).and_return(existing_id, unique_id)
+      allow(subject).to receive(:identifier_in_use?).with(existing_id).and_return(true)
+      allow(subject).to receive(:identifier_in_use?).with(unique_id).and_return(false)
     end
 
-    context 'when the pid already exists in Fedora' do
-      before do
-        expect(ActiveFedora::Base).to receive(:exists?).with(existing_pid).and_return(true)
-      end
-      it 'skips the existing pid' do
-        expect(subject.mint).to eq unique_pid
-      end
-    end
-
-    context 'when the pid already existed in Fedora and now is gone' do
-      let(:gone_pid) { existing_pid }
-
-      before do
-        expect(ActiveFedora::Base).to receive(:gone?).with(gone_pid).and_return(true)
-      end
-
-      it 'skips the deleted pid' do
-        expect(subject.mint).to eq unique_pid
-      end
+    it 'skips the existing id' do
+      expect(subject.mint).to eq unique_id
     end
   end
 end

@@ -12,7 +12,7 @@ require: rubocop-rspec
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 176
+  Max: 120
 
 # Offense count: 2
 # Configuration parameters: Max.
@@ -20,6 +20,13 @@ RSpec/ExampleLength:
   Exclude:
     - 'spec/unit/db_minter_spec.rb'
     - 'spec/unit/file_minter_spec.rb'
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/ExpectInHook:
+  Exclude:
+    - 'spec/support/shared_examples/minter.rb'
 
 # Offense count: 6
 # Configuration parameters: CustomTransform.
@@ -93,11 +100,8 @@ Style/Documentation:
     - 'app/models/minter_state.rb'
     - 'db/migrate/20160610010003_create_minter_states.rb'
     - 'db/migrate/20161021203429_rename_minter_state_random_to_rand.rb'
-    - 'lib/active_fedora/noid.rb'
-    - 'lib/active_fedora/noid/config.rb'
-    - 'lib/active_fedora/noid/minter/base.rb'
-    - 'lib/active_fedora/noid/minter/db.rb'
-    - 'lib/active_fedora/noid/minter/file.rb'
-    - 'lib/active_fedora/noid/service.rb'
-    - 'lib/generators/active_fedora/noid/install_generator.rb'
-    - 'lib/generators/active_fedora/noid/seed_generator.rb'
+
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - 'spec/unit/rspec_spec.rb'

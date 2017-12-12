@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 ENV['RAILS_ENV'] ||= 'test'
 
 def coverage_needed?
@@ -14,6 +15,7 @@ if coverage_needed?
     add_filter '/.internal_test_app'
     add_filter '/lib/generators'
     add_filter '/spec'
+    add_filter '/lib/noid/rails/version.rb'
   end
   SimpleCov.command_name 'spec'
 end
@@ -21,8 +23,7 @@ end
 require 'engine_cart'
 EngineCart.load_application!
 
-require 'active_fedora'
-require 'active_fedora/noid'
+require 'noid-rails'
 require 'byebug' unless ENV['CI']
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }

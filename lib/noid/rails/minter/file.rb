@@ -1,9 +1,11 @@
 # frozen_string_literal: true
+
 require 'noid'
 
-module ActiveFedora
-  module Noid
+module Noid
+  module Rails
     module Minter
+      # A file based minter. This is a simple case.
       class File < Base
         attr_reader :statefile
 
@@ -13,7 +15,7 @@ module ActiveFedora
         end
 
         def default_statefile
-          ActiveFedora::Noid.config.statefile
+          Noid::Rails.config.statefile
         end
 
         def read
@@ -41,11 +43,13 @@ module ActiveFedora
           end
         end
 
+        # rubocop:disable Security/MarshalLoad
         def state_for(io_object)
           Marshal.load(io_object.read)
         rescue TypeError, ArgumentError
           { template: template }
         end
+        # rubocop:enable Security/MarshalLoad
 
         def next_id
           state = read

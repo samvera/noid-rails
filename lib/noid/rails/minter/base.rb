@@ -1,10 +1,11 @@
 # frozen_string_literal: true
-require 'noid'
-require 'active_fedora'
 
-module ActiveFedora
-  module Noid
+require 'noid'
+
+module Noid
+  module Rails
     module Minter
+      # @abstract the base class for minters
       class Base < ::Noid::Minter
         ##
         # @param template [#to_s] a NOID template
@@ -14,14 +15,14 @@ module ActiveFedora
         end
 
         ##
-        # Sychronously mint a new identifier. Guarantees the ID is not already reserved in ActiveFedora.
+        # Sychronously mint a new identifier.
         #
         # @return [String] the minted identifier
         def mint
           Mutex.new.synchronize do
             loop do
               pid = next_id
-              return pid unless ActiveFedora::Base.exists?(pid) || ActiveFedora::Base.gone?(pid)
+              return pid unless identifier_in_use?(pid)
             end
           end
         end
@@ -41,12 +42,16 @@ module ActiveFedora
           raise NotImplementedError, 'Implement #write! in child class'
         end
 
-        protected
+        private
+
+        def identifier_in_use?(id)
+          Noid::Rails.config.identifier_in_use.call(id)
+        end
 
         ##
         # @return [#to_s] the default template for this
         def default_template
-          ActiveFedora::Noid.config.template
+          Noid::Rails.config.template
         end
 
         ##

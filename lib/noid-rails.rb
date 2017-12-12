@@ -1,13 +1,14 @@
 # frozen_string_literal: true
-require 'active_fedora/noid/version'
-require 'active_fedora/noid/config'
-require 'active_fedora/noid/engine'
-require 'active_fedora/noid/service'
-require 'active_fedora/noid/minter'
-require 'active_fedora/noid/model'
 
-module ActiveFedora
-  module Noid
+require 'noid/rails/version'
+require 'noid/rails/config'
+require 'noid/rails/engine'
+require 'noid/rails/service'
+require 'noid/rails/minter'
+
+module Noid
+  # A package to integrate Noid identifers with Rails projects
+  module Rails
     class << self
       def configure
         yield config

@@ -1,8 +1,23 @@
 # frozen_string_literal: true
 ENV['RAILS_ENV'] ||= 'test'
 
-require 'coveralls'
-Coveralls.wear!
+def coverage_needed?
+  ENV['COVERAGE'] || ENV['TRAVIS']
+end
+
+if coverage_needed?
+  require 'simplecov'
+  require 'coveralls'
+  SimpleCov.root(File.expand_path('../..', __FILE__))
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+  SimpleCov.start('rails') do
+    add_filter '/.internal_test_app'
+    add_filter '/lib/generators'
+    add_filter '/spec'
+  end
+  SimpleCov.command_name 'spec'
+end
+
 require 'engine_cart'
 EngineCart.load_application!
 

@@ -1,8 +1,10 @@
 # frozen_string_literal: true
+
 require 'noid'
 
-module ActiveFedora
-  module Noid
+module Noid
+  module Rails
+    # A service that validates and mints identifiers
     class Service
       attr_reader :minter
 
@@ -17,7 +19,7 @@ module ActiveFedora
       protected
 
       def default_minter
-        ActiveFedora::Noid.config.minter_class.new
+        Noid::Rails.config.minter_class.new
       end
     end
   end

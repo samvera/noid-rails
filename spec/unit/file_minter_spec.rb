@@ -1,18 +1,13 @@
 # frozen_string_literal: true
-describe ActiveFedora::Noid::Minter::File do
-  before do
-    # default novel mintings
-    allow(ActiveFedora::Base).to receive(:exists?).and_return(false)
-    allow(ActiveFedora::Base).to receive(:gone?).and_return(false)
-  end
 
+RSpec.describe Noid::Rails::Minter::File do
   it { is_expected.to respond_to(:mint) }
 
   it 'has a default statefile' do
-    expect(subject.statefile).to eq ActiveFedora::Noid.config.statefile
+    expect(subject.statefile).to eq Noid::Rails.config.statefile
   end
   it 'has a default template' do
-    expect(subject.template.to_s).to eq ActiveFedora::Noid.config.template
+    expect(subject.template.to_s).to eq Noid::Rails.config.template
   end
 
   it_behaves_like 'a minter' do
@@ -38,13 +33,14 @@ describe ActiveFedora::Noid::Minter::File do
       expect(subject.read).to be_a(Hash)
     end
     it 'has the expected template' do
-      expect(subject.read[:template]).to eq ActiveFedora::Noid.config.template
+      expect(subject.read[:template]).to eq Noid::Rails.config.template
     end
   end
 
   describe '#write!' do
     let(:starting_state) { subject.read }
     let(:minter) { Noid::Minter.new(starting_state) }
+
     before { minter.mint }
     it 'changes the state of the minter' do
       expect { subject.write!(minter) }.to change { subject.read[:seq] }

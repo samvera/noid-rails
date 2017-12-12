@@ -1,12 +1,13 @@
 # frozen_string_literal: true
-describe ActiveFedora::Noid::Service do
+
+RSpec.describe Noid::Rails::Service do
   describe 'public API' do
     it { is_expected.to respond_to(:valid?) }
     it { is_expected.to respond_to(:mint) }
   end
 
   it 'has a default minter' do
-    expect(subject.minter).to be_instance_of ActiveFedora::Noid::Minter::File
+    expect(subject.minter).to be_instance_of Noid::Rails::Minter::File
   end
 
   context 'with a custom minter' do

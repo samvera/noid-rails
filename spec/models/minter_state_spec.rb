@@ -1,9 +1,9 @@
 # frozen_string_literal: true
-include MinterStateHelper
 
-describe MinterState, type: :model do
+RSpec.describe MinterState, type: :model do
+  include MinterStateHelper
   before { reset_minter_state_table }
-  after(:all) { reset_minter_state_table }
+  after { reset_minter_state_table }
 
   let(:state) { described_class.new }
   let(:first) { described_class.first }

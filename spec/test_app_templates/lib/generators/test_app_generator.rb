@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails/generators'
 
 class TestAppGenerator < Rails::Generators::Base
@@ -9,7 +10,7 @@ class TestAppGenerator < Rails::Generators::Base
   # after setting up the application
 
   def install_engine
-    generate 'active_fedora:noid:install'
+    generate 'noid:rails:install'
     rake 'db:migrate'
   end
 end

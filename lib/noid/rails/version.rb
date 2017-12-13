@@ -2,6 +2,6 @@
 
 module Noid
   module Rails
-    VERSION = '3.0.0.alpha'
+    VERSION = '3.0.0'
   end
 end

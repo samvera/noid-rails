@@ -10,9 +10,9 @@ Docs: [![Documentation Status](https://inch-ci.org/github/samvera/noid-rails.svg
 
 # Noid::Rails
 
-Override your ActiveFedora-based applications with opaque [Noid](https://wiki.ucop.edu/display/Curation/NOID)-based identifiers.
+Mint identifiers for models in your Rails-based application with opaque [Noid](https://wiki.ucop.edu/display/Curation/NOID)-based identifiers.
 
-**This gem depends only upon ActiveFedora, not on Hydra or HydraHead**
+**This gem depends only upon Rails, not on ActiveFedora**
 
 # Table of Contents
 
@@ -203,9 +203,11 @@ And the service will delegate minting and validating to an instance of your cust
 
 # Help
 
-If you have questions or need help, please email [the Samvera community tech list](mailto:samvera-tech@googlegroups.com) or stop by the #dev channel in [the Samvera community Slack team](https://wiki.duraspace.org/pages/viewpage.action?pageId=43910187#Getintouch!-Slack): [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samvera.org/)
+If you have questions or need help, please email [the Samvera community tech list](mailto:samvera-tech@googlegroups.com) or stop by the #dev channel in [the Samvera community Slack team](https://wiki.duraspace.org/pages/viewpage.action?pageId=87460391#Getintouch!-Slack: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samvera.org/)
 
 # Acknowledgments
 
 This software has been developed by and is brought to you by the Samvera community.  Learn more at the
 [Samvera website](http://samvera.org/).
+
+![Samvera Logo](https://wiki.duraspace.org/download/thumbnails/87459292/samvera-fall-font2-200w.png?version=1&modificationDate=1498550535816&api=v2)

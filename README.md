@@ -1,10 +1,9 @@
 Code: [![Version](https://badge.fury.io/rb/noid-rails.png)](http://badge.fury.io/rb/noid-rails)
 [![Build Status](https://travis-ci.org/projecthydra/noid-rails.png?branch=master)](https://travis-ci.org/projecthydra/noid-rails)
 [![Coverage Status](https://coveralls.io/repos/github/projecthydra/noid-rails/badge.svg?branch=master)](https://coveralls.io/github/projecthydra/noid-rails?branch=master)
-[![Code Climate](https://codeclimate.com/github/projecthydra/noid-rails/badges/gpa.svg)](https://codeclimate.com/github/projecthydra/noid-rails)
-[![Dependency Status](https://gemnasium.com/projecthydra/noid-rails.png)](https://gemnasium.com/projecthydra/noid-rails)
+[![Code Climate](https://codeclimate.com/github/samvera/noid-rails/badges/gpa.svg)](https://codeclimate.com/github/samvera/noid-rails)
 
-Docs: [![Documentation Status](https://inch-ci.org/github/projecthydra/noid-rails.svg?branch=master)](https://inch-ci.org/github/projecthydra/noid-rails)
+Docs: [![Documentation Status](https://inch-ci.org/github/samvera/noid-rails.svg?branch=master)](https://inch-ci.org/github/samvera/noid-rails)
 [![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/noid-rails)
 [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
 [![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
@@ -204,11 +203,9 @@ And the service will delegate minting and validating to an instance of your cust
 
 # Help
 
-If you have questions or need help, please email [the Hydra community tech list](mailto:hydra-tech@googlegroups.com) or stop by the #dev channel in [the Hydra community Slack team](https://wiki.duraspace.org/pages/viewpage.action?pageId=43910187#Getintouch!-Slack): [![Slack Status](http://slack.projecthydra.org/badge.svg)](http://slack.projecthydra.org/)
+If you have questions or need help, please email [the Samvera community tech list](mailto:samvera-tech@googlegroups.com) or stop by the #dev channel in [the Samvera community Slack team](https://wiki.duraspace.org/pages/viewpage.action?pageId=43910187#Getintouch!-Slack): [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samvera.org/)
 
 # Acknowledgments
 
-This software has been developed by and is brought to you by the Hydra community.  Learn more at the
-[Project Hydra website](http://projecthydra.org/).
-
-![Project Hydra Logo](http://sufia.io/assets/images/hydra_logo.png)
+This software has been developed by and is brought to you by the Samvera community.  Learn more at the
+[Samvera website](http://samvera.org/).

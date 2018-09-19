@@ -1,20 +1,33 @@
-Code: [![Version](https://badge.fury.io/rb/noid-rails.png)](http://badge.fury.io/rb/noid-rails)
+# Noid::Rails
+
+Code:
+[![Version](https://badge.fury.io/rb/noid-rails.png)](http://badge.fury.io/rb/noid-rails)
 [![Build Status](https://travis-ci.org/samvera/noid-rails.png?branch=master)](https://travis-ci.org/samvera/noid-rails)
 [![Coverage Status](https://coveralls.io/repos/github/samvera/noid-rails/badge.svg?branch=master)](https://coveralls.io/github/samvera/noid-rails?branch=master)
 [![Code Climate](https://codeclimate.com/github/samvera/noid-rails/badges/gpa.svg)](https://codeclimate.com/github/samvera/noid-rails)
 
-Docs: [![Documentation Status](https://inch-ci.org/github/samvera/noid-rails.svg?branch=master)](https://inch-ci.org/github/samvera/noid-rails)
-[![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/noid-rails)
-[![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
+Docs:
 [![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
+[![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
+[![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/noid-rails)
+[![Documentation Status](https://inch-ci.org/github/samvera/noid-rails.svg?branch=master)](https://inch-ci.org/github/samvera/noid-rails)
 
-# Noid::Rails
+Jump In: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samvera.org/)
 
-Mint identifiers for models in your Rails-based application with opaque [Noid](https://wiki.ucop.edu/display/Curation/NOID)-based identifiers.
+# What is noid-rails?
+
+This gem mints identifiers for models in your Rails-based application with opaque [Noid](https://wiki.ucop.edu/display/Curation/NOID)-based identifiers.
 
 **This gem depends only upon Rails, not on ActiveFedora**
 
-# Table of Contents
+## Product Owner & Maintenance
+ **noid-rails** is a Core Component of the Samvera community. The documentation for
+what this means can be found
+[here](http://samvera.github.io/core_components.html#requirements-for-a-core-component).
+ ### Product Owner
+ [Justin Coyne](https://github.com/jcoyne)
+
+## Table of Contents
 
   * [Installation](#installation)
   * [Usage](#usage)
@@ -28,7 +41,7 @@ Mint identifiers for models in your Rails-based application with opaque [Noid](h
   * [Help](#help)
   * [Acknowledgments](#acknowledgments)
 
-# Installation
+## Installation
 
 Add this line to your application's Gemfile:
 
@@ -42,9 +55,9 @@ Or install it yourself via:
 
     $ gem install noid-rails
 
-# Usage
+## Usage
 
-## Minting and validating identifiers
+### Minting and validating identifiers
 
 Mint a new Noid:
 
@@ -60,7 +73,7 @@ noid_service.valid? 'xyz123foobar'
 > false
 ```
 
-## ActiveFedora integration
+### ActiveFedora integration
 
 To get ActiveFedora to automatically call your Noid service whenever a new ActiveFedora object is saved, include the `Noid::Rails::Model`, e.g.:
 
@@ -83,7 +96,7 @@ class MyObject < ActiveFedora::Base
 end
 ```
 
-### Identifier/URI translation
+#### Identifier/URI translation
 
 As Noid::Rails overrides the default identifier minting strategy in ActiveFedora, you will need to let ActiveFedora know how to translate identifiers into URIs and vice versa so that identifiers are laid out in a sustainable way in Fedora.  Add the following to e.g. `config/initializers/active_fedora.rb`:
 
@@ -99,13 +112,13 @@ ActiveFedora::Base.translate_id_to_uri = lambda do |id|
 
 This will make sure your objects have Noid-like identifiers (e.g. `bb22bb22b`) that map to URIs in Fedora (e.g. `bb/22/bb/22/bb22bb22b`).
 
-## Overriding default behavior
+### Overriding default behavior
 
 The default minter in Noid::Rails is the file-backed minter to preserve default behavior.
 
 To better support multi-host production installations that expect a shared database but not necessarily a shared filesystem (e.g., between load-balanced Rails applications), we highly recommend swapping in the database-backed minter.
 
-### Use database-based minter state
+#### Use database-based minter state
 
 The database-based minter stores minter state information in your application's relational database. To use it, you'll first need to run the install generator:
 
@@ -149,7 +162,7 @@ $ rake noid:rails:migrate:file_to_database
 $ rake noid:rails:migrate:database_to_file
 ```
 
-### Identifier template
+#### Identifier template
 
 To override the default identifier pattern -- a nine-character string consisting of two alphanumeric digits, two numeric digits, two alphanumeric digits, two numeric digits, and a check digit -- put the following code in e.g. `config/initializers/noid-rails.rb`:
 
@@ -163,7 +176,7 @@ end
 
 For more information about the format of Noid patterns, see pages 8-10 of the [Noid documentation](https://wiki.ucop.edu/download/attachments/16744482/noid.pdf).
 
-### Custom minters
+#### Custom minters
 
 If you don't want your minter's state to be persisted, you may also write and configure your own minter.  First write up a minter class that looks like the following:
 
@@ -203,7 +216,7 @@ And the service will delegate minting and validating to an instance of your cust
 
 # Help
 
-If you have questions or need help, please email [the Samvera community tech list](mailto:samvera-tech@googlegroups.com) or stop by the #dev channel in [the Samvera community Slack team](https://wiki.duraspace.org/pages/viewpage.action?pageId=87460391#Getintouch!-Slack: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samvera.org/)
+The Samvera community is here to help. Please see our [support guide](./SUPPORT.md).
 
 # Acknowledgments
 

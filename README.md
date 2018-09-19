@@ -2,7 +2,6 @@ Code: [![Version](https://badge.fury.io/rb/noid-rails.png)](http://badge.fury.io
 [![Build Status](https://travis-ci.org/samvera/noid-rails.png?branch=master)](https://travis-ci.org/samvera/noid-rails)
 [![Coverage Status](https://coveralls.io/repos/github/samvera/noid-rails/badge.svg?branch=master)](https://coveralls.io/github/samvera/noid-rails?branch=master)
 [![Code Climate](https://codeclimate.com/github/samvera/noid-rails/badges/gpa.svg)](https://codeclimate.com/github/samvera/noid-rails)
-[![Dependency Status](https://gemnasium.com/samvera/noid-rails.png)](https://gemnasium.com/samvera/noid-rails)
 
 Docs: [![Documentation Status](https://inch-ci.org/github/samvera/noid-rails.svg?branch=master)](https://inch-ci.org/github/samvera/noid-rails)
 [![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/noid-rails)

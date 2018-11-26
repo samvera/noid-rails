@@ -26,7 +26,7 @@ module Noid
       # the minter will continue to cycle through ids until it finds one that
       # returns false
       def identifier_in_use
-        @identifier_in_use = lambda do |_id|
+        @identifier_in_use ||= lambda do |_id|
           false
         end
       end

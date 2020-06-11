@@ -1,16 +1,8 @@
 # Noid::Rails
 
-Code:
-[![Version](https://badge.fury.io/rb/noid-rails.png)](http://badge.fury.io/rb/noid-rails)
-[![Build Status](https://circleci.com/gh/samvera/noid-rails.svg?style=svg)](https://circleci.com/gh/samvera/noid-rails)
-[![Coverage Status](https://coveralls.io/repos/github/samvera/noid-rails/badge.svg?branch=master)](https://coveralls.io/github/samvera/noid-rails?branch=master)
-[![Code Climate](https://codeclimate.com/github/samvera/noid-rails/badges/gpa.svg)](https://codeclimate.com/github/samvera/noid-rails)
+Code: [![Version](https://badge.fury.io/rb/noid-rails.png)](http://badge.fury.io/rb/noid-rails) [![Build Status](https://circleci.com/gh/samvera/noid-rails.svg?style=svg)](https://circleci.com/gh/samvera/noid-rails) [![Coverage Status](https://coveralls.io/repos/github/samvera/noid-rails/badge.svg?branch=master)](https://coveralls.io/github/samvera/noid-rails?branch=master) [![Code Climate](https://codeclimate.com/github/samvera/noid-rails/badges/gpa.svg)](https://codeclimate.com/github/samvera/noid-rails)
 
-Docs:
-[![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
-[![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md)
-[![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/noid-rails)
-[![Documentation Status](https://inch-ci.org/github/samvera/noid-rails.svg?branch=master)](https://inch-ci.org/github/samvera/noid-rails)
+Docs: [![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE) [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md) [![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/noid-rails) [![Documentation Status](https://inch-ci.org/github/samvera/noid-rails.svg?branch=master)](https://inch-ci.org/github/samvera/noid-rails)
 
 Jump In: [![Slack Status](http://slack.samvera.org/badge.svg)](http://slack.samvera.org/)
 
@@ -21,39 +13,52 @@ This gem mints identifiers for models in your Rails-based application with opaqu
 **This gem depends only upon Rails, not on ActiveFedora**
 
 ## Product Owner & Maintenance
- **noid-rails** is a Core Component of the Samvera community. The documentation for
-what this means can be found
-[here](http://samvera.github.io/core_components.html#requirements-for-a-core-component).
- ### Product Owner
- [Justin Coyne](https://github.com/jcoyne)
+
+**noid-rails** is a Core Component of the Samvera community. The documentation for what this means can be found [here](http://samvera.github.io/core_components.html#requirements-for-a-core-component).
+
+### Product Owner
+
+[Justin Coyne](https://github.com/jcoyne)
 
 ## Table of Contents
 
-  * [Installation](#installation)
-  * [Usage](#usage)
-    * [Minting and validating identifiers](#minting-and-validating-identifiers)
-    * [ActiveFedora integration](#activefedora-integration)
-      * [Identifier/URI translation](#identifieruri-translation)
-    * [Overriding default behavior](#overriding-default-behavior)
-      * [Use database-based minter state](#use-database-based-minter-state)
-      * [Identifier template](#identifier-template)
-      * [Custom minters](#custom-minters)
-  * [Help](#help)
-  * [Acknowledgments](#acknowledgments)
+- [Installation](#installation)
+- [Usage](#usage)
+
+  - [Minting and validating identifiers](#minting-and-validating-identifiers)
+  - [ActiveFedora integration](#activefedora-integration)
+
+    - [Identifier/URI translation](#identifieruri-translation)
+
+  - [Overriding default behavior](#overriding-default-behavior)
+
+    - [Use database-based minter state](#use-database-based-minter-state)
+    - [Identifier template](#identifier-template)
+    - [Custom minters](#custom-minters)
+
+- [Help](#help)
+
+- [Acknowledgments](#acknowledgments)
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'noid-rails'
+```
+gem 'noid-rails'
+```
 
 And then execute:
 
-    $ bundle install
+```
+$ bundle install
+```
 
 Or install it yourself via:
 
-    $ gem install noid-rails
+```
+$ gem install noid-rails
+```
 
 ## Usage
 
@@ -66,7 +71,7 @@ noid_service = Noid::Rails::Service.new
 noid = noid_service.mint
 ```
 
-This creates a Noid with the default identifier template, which you can override (see below).  Now that you have a service object with a template, you can also use it to validate identifiers to see if they conform to the template:
+This creates a Noid with the default identifier template, which you can override (see below). Now that you have a service object with a template, you can also use it to validate identifiers to see if they conform to the template:
 
 ```ruby
 noid_service.valid? 'xyz123foobar'
@@ -98,7 +103,7 @@ end
 
 #### Identifier/URI translation
 
-As Noid::Rails overrides the default identifier minting strategy in ActiveFedora, you will need to let ActiveFedora know how to translate identifiers into URIs and vice versa so that identifiers are laid out in a sustainable way in Fedora.  Add the following to e.g. `config/initializers/active_fedora.rb`:
+As Noid::Rails overrides the default identifier minting strategy in ActiveFedora, you will need to let ActiveFedora know how to translate identifiers into URIs and vice versa so that identifiers are laid out in a sustainable way in Fedora. Add the following to e.g. `config/initializers/active_fedora.rb`:
 
 ```ruby
 baseparts = 2 + [(Noid::Rails::Config.template.gsub(/\.[rsz]/, '').length.to_f / 2).ceil, 4].min
@@ -178,7 +183,7 @@ For more information about the format of Noid patterns, see pages 8-10 of the [N
 
 #### Custom minters
 
-If you don't want your minter's state to be persisted, you may also write and configure your own minter.  First write up a minter class that looks like the following:
+If you don't want your minter's state to be persisted, you may also write and configure your own minter. First write up a minter class that looks like the following:
 
 ```ruby
 class MyMinter < Noid::Rails::Minter::Base
@@ -214,13 +219,27 @@ end
 
 And the service will delegate minting and validating to an instance of your customized minter class.
 
+## Releasing
+
+1. `bundle install`
+2. Increase the version number in `lib/noid/rails/version.rb`
+3. Increase the same version number in `.github_changelog_generator`
+4. Update `CHANGELOG.md` by running this command:
+
+  ```
+  github_changelog_generator --user samvera --project noid-rails --token YOUR_GITHUB_TOKEN_HERE
+  ```
+
+5. Commit these changes to the master branch
+
+6. Run `rake release`
+
 # Help
 
 The Samvera community is here to help. Please see our [support guide](./SUPPORT.md).
 
 # Acknowledgments
 
-This software has been developed by and is brought to you by the Samvera community.  Learn more at the
-[Samvera website](http://samvera.org/).
+This software has been developed by and is brought to you by the Samvera community. Learn more at the [Samvera website](http://samvera.org/).
 
 ![Samvera Logo](https://wiki.duraspace.org/download/thumbnails/87459292/samvera-fall-font2-200w.png?version=1&modificationDate=1498550535816&api=v2)

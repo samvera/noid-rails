@@ -21,12 +21,11 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'actionpack', '>= 5.0.0', '< 7'
   spec.add_dependency 'noid', '~> 0.9'
 
+  spec.add_development_dependency 'bixby', '~> 3.0.0'
   spec.add_development_dependency 'bundler', '>= 1.7'
   spec.add_development_dependency 'engine_cart', '~> 2.2'
   spec.add_development_dependency 'rake', '>= 11'
   spec.add_development_dependency 'rspec', '~> 3.8'
   spec.add_development_dependency 'rspec_junit_formatter'
-  spec.add_development_dependency 'rubocop', '~> 0.52.0'
-  spec.add_development_dependency 'rubocop-rspec', '~> 1.20.1'
   spec.add_development_dependency 'sqlite3'
 end

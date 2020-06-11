@@ -1,9 +1,15 @@
-require: rubocop-rspec
+inherit_gem:
+  bixby: bixby_default.yml
+
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.6
   DisplayCopNames: true
+  Exclude:
+    - 'db/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
 
 Bundler/DuplicatedGem:
   Enabled: false

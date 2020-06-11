@@ -18,10 +18,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^spec/})
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'actionpack', '>= 5.0.0', '< 6'
+  spec.add_dependency 'actionpack', '>= 5.0.0', '< 7'
   spec.add_dependency 'noid', '~> 0.9'
 
-  spec.add_development_dependency 'bundler', '~> 1.7'
+  spec.add_development_dependency 'bundler', '>= 1.7'
   spec.add_development_dependency 'engine_cart', '~> 2.2'
   spec.add_development_dependency 'rake', '>= 11'
   spec.add_development_dependency 'rspec', '~> 3.8'

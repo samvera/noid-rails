@@ -128,7 +128,7 @@ To better support multi-host production installations that expect a shared datab
 The database-based minter stores minter state information in your application's relational database. To use it, you'll first need to run the install generator:
 
 ```bash
-$ rails generate active_fedora:noid:install
+$ rails generate noid:rails:install
 ```
 
 This will create the necessary database migrations.
@@ -138,7 +138,7 @@ Then run `rake db:migrate`
 To start minting identifiers with the new minter, override the AF::Noid configuration in e.g. `config/initializers/noid-rails.rb`:
 
 ```ruby
-require 'active_fedora/noid'
+require 'noid-rails'
 
 Noid::Rails.configure do |config|
   config.minter_class = Noid::Rails::Minter::Db
@@ -148,7 +148,7 @@ end
 Using the database-backed minter can cause problems with your test suite, where it is often sensible to wipe out database rows between tests (which destroys the database-backed minter's state, which renders it unusable). To deal with this and still get the benefits of using the database-backed minter in development and production environments, you'll also want to add the following helper to your `spec/spec_helper.rb`:
 
 ```ruby
-require 'active_fedora/noid/rspec'
+require 'noid/rails/rspec'
 
 RSpec.configure do |config|
   include Noid::Rails::RSpec

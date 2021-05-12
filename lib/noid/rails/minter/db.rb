@@ -35,7 +35,7 @@ module Noid
         # @param [::Noid::Minter] minter state containing the updates
         def serialize(inst, minter)
           # namespace and template are the same, now update the other attributes
-          inst.update_attributes!(
+          inst.update!(
             seq: minter.seq,
             counters: JSON.generate(minter.counters),
             rand: Marshal.dump(minter.instance_variable_get(:@rand))

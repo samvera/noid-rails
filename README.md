@@ -1,6 +1,6 @@
 # Noid::Rails
 
-Code: [![Version](https://badge.fury.io/rb/noid-rails.png)](http://badge.fury.io/rb/noid-rails) [![Build Status](https://circleci.com/gh/samvera/noid-rails.svg?style=svg)](https://circleci.com/gh/samvera/noid-rails) [![Coverage Status](https://coveralls.io/repos/github/samvera/noid-rails/badge.svg?branch=master)](https://coveralls.io/github/samvera/noid-rails?branch=master) [![Code Climate](https://codeclimate.com/github/samvera/noid-rails/badges/gpa.svg)](https://codeclimate.com/github/samvera/noid-rails)
+Code: [![Version](https://badge.fury.io/rb/noid-rails.png)](http://badge.fury.io/rb/noid-rails) [![Build Status](https://circleci.com/gh/samvera/noid-rails.svg?style=svg)](https://circleci.com/gh/samvera/noid-rails) [![Coverage Status](https://coveralls.io/repos/github/samvera/noid-rails/badge.svg?branch=master)](https://coveralls.io/github/samvera/noid-rails?branch=master)[![Maintainability](https://api.codeclimate.com/v1/badges/9c8739a529edc982fdec/maintainability)](https://codeclimate.com/github/samvera/noid-rails/maintainability)
 
 Docs: [![Apache 2.0 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE) [![Contribution Guidelines](http://img.shields.io/badge/CONTRIBUTING-Guidelines-blue.svg)](./CONTRIBUTING.md) [![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/gems/noid-rails) [![Documentation Status](https://inch-ci.org/github/samvera/noid-rails.svg?branch=master)](https://inch-ci.org/github/samvera/noid-rails)
 

@@ -1,8 +1,22 @@
 # Changelog
 
-## [3.0.2](https://github.com/samvera/noid-rails/tree/3.0.2) (2020-06-11)
+## [3.0.3](https://github.com/samvera/noid-rails/tree/3.0.3) (2021-05-13)
 
-[Full Changelog](https://github.com/samvera/noid-rails/compare/v3.0.1...3.0.2)
+[Full Changelog](https://github.com/samvera/noid-rails/compare/v3.0.2...3.0.3)
+
+**Merged pull requests:**
+
+- Fix code climate badge [\#102](https://github.com/samvera/noid-rails/pull/102) ([bess](https://github.com/bess))
+- Update CI matrix to only cover supported versions [\#101](https://github.com/samvera/noid-rails/pull/101) ([bess](https://github.com/bess))
+- Fix deprecated/removed update\_attributes! with update! [\#100](https://github.com/samvera/noid-rails/pull/100) ([dgcliff](https://github.com/dgcliff))
+- Remove remaining active\_fedora:noid references from README [\#99](https://github.com/samvera/noid-rails/pull/99) ([cjcolvar](https://github.com/cjcolvar))
+- Adding CONTRIBUTING.md
+
+This was uploaded via automation. [\#98](https://github.com/samvera/noid-rails/pull/98) ([jeremyf](https://github.com/jeremyf))
+
+## [v3.0.2](https://github.com/samvera/noid-rails/tree/v3.0.2) (2020-06-11)
+
+[Full Changelog](https://github.com/samvera/noid-rails/compare/v3.0.1...v3.0.2)
 
 **Implemented enhancements:**
 
@@ -16,6 +30,7 @@
 
 **Merged pull requests:**
 
+- Prep for 3.0.2 release [\#97](https://github.com/samvera/noid-rails/pull/97) ([bess](https://github.com/bess))
 - Align on current samvera style guide [\#96](https://github.com/samvera/noid-rails/pull/96) ([bess](https://github.com/bess))
 - Adding Ruby 2.7.z and Rails 6.y.z releases to the CircleCI build configuration [\#95](https://github.com/samvera/noid-rails/pull/95) ([jrgriffiniii](https://github.com/jrgriffiniii))
 - Update CircleCI Ruby and Rails versions [\#92](https://github.com/samvera/noid-rails/pull/92) ([botimer](https://github.com/botimer))
@@ -127,10 +142,6 @@
 
 [Full Changelog](https://github.com/samvera/noid-rails/compare/v2.0.0.beta6...v1.1.3)
 
-**Merged pull requests:**
-
-- Treeify algorithm should raise ArgumentError when passed nil or empty string [\#49](https://github.com/samvera/noid-rails/pull/49) ([mjgiarlo](https://github.com/mjgiarlo))
-
 ## [v2.0.0.beta6](https://github.com/samvera/noid-rails/tree/v2.0.0.beta6) (2016-10-26)
 
 [Full Changelog](https://github.com/samvera/noid-rails/compare/v2.0.0.beta5...v2.0.0.beta6)
@@ -177,6 +188,8 @@
 **Closed issues:**
 
 - Running generator raises an error. [\#37](https://github.com/samvera/noid-rails/issues/37)
+- Test gem in two configurations: with Rails and without Rails [\#36](https://github.com/samvera/noid-rails/issues/36)
+- Conditionalize autoload of Engine and classes that depend on ActiveRecord [\#35](https://github.com/samvera/noid-rails/issues/35)
 - MinterState isn't requirable by implementors. [\#29](https://github.com/samvera/noid-rails/issues/29)
 
 ## [v2.0.0.beta3](https://github.com/samvera/noid-rails/tree/v2.0.0.beta3) (2016-09-13)
@@ -225,7 +238,6 @@
 **Merged pull requests:**
 
 - Preserve the hash when translating to id. Fixes \#26 [\#27](https://github.com/samvera/noid-rails/pull/27) ([jcoyne](https://github.com/jcoyne))
-- Adding check for gone since that is also not a valid id to mint. [\#18](https://github.com/samvera/noid-rails/pull/18) ([carolyncole](https://github.com/carolyncole))
 
 ## [v1.1.0](https://github.com/samvera/noid-rails/tree/v1.1.0) (2016-05-10)
 
@@ -238,6 +250,10 @@
 ## [v1.0.3](https://github.com/samvera/noid-rails/tree/v1.0.3) (2015-12-04)
 
 [Full Changelog](https://github.com/samvera/noid-rails/compare/v1.0.2...v1.0.3)
+
+**Merged pull requests:**
+
+- Adding check for gone since that is also not a valid id to mint. [\#18](https://github.com/samvera/noid-rails/pull/18) ([carolyncole](https://github.com/carolyncole))
 
 ## [v1.0.2](https://github.com/samvera/noid-rails/tree/v1.0.2) (2015-08-11)
 

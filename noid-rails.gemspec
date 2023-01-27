@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0")
   spec.test_files    = spec.files.grep(%r{^spec/})
   spec.require_paths = ['lib']
+  spec.metadata      = { "rubygems_mfa_required" => "true" }
 
   spec.add_dependency 'actionpack', '>= 5.0.0', '< 7.1'
   spec.add_dependency 'noid', '~> 0.9'

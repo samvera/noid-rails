@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.metadata      = { "rubygems_mfa_required" => "true" }
 
-  spec.add_dependency 'actionpack', '>= 5.0.0', '< 8'
+  spec.add_dependency 'actionpack', '>= 5.0.0', '< 9'
   spec.add_dependency 'noid', '~> 0.9'
 
   spec.add_development_dependency 'bixby', '~> 5.0.0'
